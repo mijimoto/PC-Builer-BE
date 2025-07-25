@@ -35,10 +35,10 @@ public class PcbuildRestController {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/{pcid}/{componentid}/{accountid}")
-    public ResponseEntity<PcbuildDTO> findById(@PathVariable Integer pcid, @PathVariable Integer componentid, @PathVariable Integer accountid) {
+    @GetMapping("/{pcid}/{componentid}")
+    public ResponseEntity<PcbuildDTO> findById(@PathVariable Integer pcid, @PathVariable Integer componentid) {
         logger.debug("GET - findById");
-        PcbuildDTO dto = service.findById(pcid, componentid, accountid);
+        PcbuildDTO dto = service.findById(pcid, componentid);
         return (dto != null) ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
@@ -52,10 +52,10 @@ public class PcbuildRestController {
         }
     }
 
-    @PutMapping(value = "/{pcid}/{componentid}/{accountid}")
-    public ResponseEntity<Void> save(@PathVariable Integer pcid, @PathVariable Integer componentid, @PathVariable Integer accountid, @RequestBody PcbuildDTO pcbuildDTO) {
+    @PutMapping(value = "/{pcid}/{componentid}")
+    public ResponseEntity<Void> save(@PathVariable Integer pcid, @PathVariable Integer componentid, @RequestBody PcbuildDTO pcbuildDTO) {
         logger.debug("PUT - save");
-        service.save(pcid, componentid, accountid, pcbuildDTO);
+        service.save(pcid, componentid, pcbuildDTO);
         return ResponseEntity.ok().build();
     }
 
@@ -69,20 +69,20 @@ public class PcbuildRestController {
         }
     }
 
-    @PatchMapping(value = "/{pcid}/{componentid}/{accountid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> partialUpdate(@PathVariable Integer pcid, @PathVariable Integer componentid, @PathVariable Integer accountid, @RequestBody PcbuildDTO pcbuildDTO) {
+    @PatchMapping(value = "/{pcid}/{componentid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> partialUpdate(@PathVariable Integer pcid, @PathVariable Integer componentid, @RequestBody PcbuildDTO pcbuildDTO) {
         logger.debug("PATCH - partialUpdate");
-        if (service.partialUpdate(pcid, componentid, accountid, pcbuildDTO)) {
+        if (service.partialUpdate(pcid, componentid, pcbuildDTO)) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/{pcid}/{componentid}/{accountid}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer pcid, @PathVariable Integer componentid, @PathVariable Integer accountid) {
+    @DeleteMapping("/{pcid}/{componentid}")
+    public ResponseEntity<Void> deleteById(@PathVariable Integer pcid, @PathVariable Integer componentid) {
         logger.debug("DELETE - deleteById");
-        if (service.deleteById(pcid, componentid, accountid)) {
+        if (service.deleteById(pcid, componentid)) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
