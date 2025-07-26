@@ -42,7 +42,7 @@ public class ComponentsRestController {
         return (dto != null) ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity<Void> create(@RequestBody ComponentsDTO componentsDTO) {
         logger.debug("POST - create");
         if (service.create(componentsDTO)) {

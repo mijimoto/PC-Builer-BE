@@ -50,8 +50,9 @@ public class Cases implements Serializable {
     private Integer          internal35Bays    ;
 
     //--- LINKS ( RELATIONSHIPS )
-    @ManyToOne
-    @JoinColumn(name="PartID", referencedColumnName="PartID", insertable=false, updatable=false)
-    private Parts      parts;
+    @OneToOne
+@MapsId
+@JoinColumn(name = "PartID")
+private Parts parts;
 
 }

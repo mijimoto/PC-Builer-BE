@@ -37,8 +37,9 @@ public class Wirednetworkcard implements Serializable {
     private String           color    ;
 
     //--- LINKS ( RELATIONSHIPS )
-    @ManyToOne
-    @JoinColumn(name="PartID", referencedColumnName="PartID", insertable=false, updatable=false)
-    private Parts      parts;
+    @OneToOne
+@MapsId
+@JoinColumn(name = "PartID")
+private Parts parts;
 
 }

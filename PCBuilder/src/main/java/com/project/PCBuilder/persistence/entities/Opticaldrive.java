@@ -49,8 +49,9 @@ public class Opticaldrive implements Serializable {
     private String           cdWrite    ;
 
     //--- LINKS ( RELATIONSHIPS )
-    @ManyToOne
-    @JoinColumn(name="PartID", referencedColumnName="PartID", insertable=false, updatable=false)
-    private Parts      parts;
+    @OneToOne
+@MapsId
+@JoinColumn(name = "PartID")
+private Parts parts;
 
 }
