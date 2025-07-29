@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Telosys Database Repository --><root>
-    <tableList databaseId="1" databaseName="SQL-SERVER" databaseProductName="Microsoft SQL Server" generation="2025-07-28 02:47:32">
+    <tableList databaseId="1" databaseName="SQL-SERVER" databaseProductName="Microsoft SQL Server" generation="2025-07-29 09:44:23">
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Accounts" name="Accounts" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="AccountID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="accountid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Accountid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="FirstName" dbNotNull="false" dbPosition="2" dbSize="256" dbTypeName="varchar" inputType="text" javaName="firstname" javaType="java.lang.String" jdbcTypeCode="12" label="Firstname" maxLength="256" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="LastName" dbNotNull="false" dbPosition="3" dbSize="256" dbTypeName="varchar" inputType="text" javaName="lastname" javaType="java.lang.String" jdbcTypeCode="12" label="Lastname" maxLength="256" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="Email" dbNotNull="false" dbPosition="4" dbSize="256" dbTypeName="varchar" inputType="text" javaName="email" javaType="java.lang.String" jdbcTypeCode="12" label="Email" maxLength="256" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="Email" dbNotNull="true" dbPosition="4" dbSize="256" dbTypeName="varchar" inputType="text" javaName="email" javaType="java.lang.String" jdbcTypeCode="12" label="Email" maxLength="256" notEmpty="true" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="PasswordHased" dbNotNull="false" dbPosition="5" dbSize="256" dbTypeName="varchar" inputType="text" javaName="passwordhased" javaType="java.lang.String" jdbcTypeCode="12" label="Passwordhased" maxLength="256" notNull="false" selected="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCs__AccountID__3B75D760" id="LINK_FK_FK__PCs__AccountID__3B75D760_I" inverseSideOf="LINK_FK_FK__PCs__AccountID__3B75D760_O" javaName="listOfPcs" javaType="unused" joinTableName="" mappedBy="accounts" optional="" owningSide="false" sourceTableName="Accounts" targetEntity="Pcs" targetTableName="PCs" used="true"/>
+            <column dbComment="" dbDefaultValue="((0))" dbName="isVerified" dbNotNull="false" dbPosition="6" dbSize="1" dbTypeName="bit" inputType="checkbox" javaName="isverified" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Isverified" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="token" dbNotNull="false" dbPosition="7" dbSize="128" dbTypeName="varchar" inputType="text" javaName="token" javaType="java.lang.String" jdbcTypeCode="12" label="Token" maxLength="128" notNull="false" selected="true"/>
+            <column dateType="DT" dbComment="" dbDefaultValue="" dbName="tokenExpiry" dbNotNull="false" dbPosition="8" dbSize="23" dbTypeName="datetime" inputType="" javaName="tokenexpiry" javaType="java.util.Date" jdbcTypeCode="93" label="Tokenexpiry" notNull="false" selected="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCs__AccountID__3D5E1FD2" id="LINK_FK_FK__PCs__AccountID__3D5E1FD2_I" inverseSideOf="LINK_FK_FK__PCs__AccountID__3D5E1FD2_O" javaName="listOfPcs" javaType="unused" joinTableName="" mappedBy="accounts" optional="" owningSide="false" sourceTableName="Accounts" targetEntity="Pcs" targetTableName="PCs" used="true"/>
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Cpu" name="CPU" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
@@ -17,10 +20,10 @@
             <column dbComment="" dbDefaultValue="" dbName="microarchitecture" dbNotNull="false" dbPosition="5" dbSize="100" dbTypeName="varchar" inputType="text" javaName="microarchitecture" javaType="java.lang.String" jdbcTypeCode="12" label="Microarchitecture" maxLength="100" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="tdp" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="int" inputType="number" javaName="tdp" javaType="java.lang.Integer" jdbcTypeCode="4" label="Tdp" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="graphics" dbNotNull="false" dbPosition="7" dbSize="100" dbTypeName="varchar" inputType="text" javaName="graphics" javaType="java.lang.String" jdbcTypeCode="12" label="Graphics" maxLength="100" notNull="false" selected="true"/>
-            <fk name="FK__CPU__PartID__47DBAE45">
+            <fk name="FK__CPU__PartID__49C3F6B7">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="CPU" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__CPU__PartID__47DBAE45" id="LINK_FK_FK__CPU__PartID__47DBAE45_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="CPU" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__CPU__PartID__49C3F6B7" id="LINK_FK_FK__CPU__PartID__49C3F6B7_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="CPU" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -32,10 +35,10 @@
             <column dbComment="" dbDefaultValue="" dbName="noise_level" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="noiseLevel" javaType="java.lang.String" jdbcTypeCode="12" label="Noise level" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="4" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="size" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="size" javaType="java.lang.Integer" jdbcTypeCode="4" label="Size" notNull="false" selected="true"/>
-            <fk name="FK__CPUCooler__PartI__4AB81AF0">
+            <fk name="FK__CPUCooler__PartI__4CA06362">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="CPUCooler" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__CPUCooler__PartI__4AB81AF0" id="LINK_FK_FK__CPUCooler__PartI__4AB81AF0_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="CPUCooler" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__CPUCooler__PartI__4CA06362" id="LINK_FK_FK__CPUCooler__PartI__4CA06362_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="CPUCooler" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -45,10 +48,10 @@
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="type" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="12" label="Type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="form_factor" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="formFactor" javaType="java.lang.String" jdbcTypeCode="12" label="Form factor" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__CaseAcces__PartI__7B5B524B">
+            <fk name="FK__CaseAcces__PartI__7D439ABD">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="CaseAccessory" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__CaseAcces__PartI__7B5B524B" id="LINK_FK_FK__CaseAcces__PartI__7B5B524B_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="CaseAccessory" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__CaseAcces__PartI__7D439ABD" id="LINK_FK_FK__CaseAcces__PartI__7D439ABD_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="CaseAccessory" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -62,10 +65,10 @@
             <column dbComment="" dbDefaultValue="" dbName="airflow" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="airflow" javaType="java.lang.String" jdbcTypeCode="12" label="Airflow" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="noise_level" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="noiseLevel" javaType="java.lang.String" jdbcTypeCode="12" label="Noise level" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="pwm" dbNotNull="false" dbPosition="7" dbSize="1" dbTypeName="bit" inputType="checkbox" javaName="pwm" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Pwm" notNull="false" selected="true"/>
-            <fk name="FK__CaseFan__PartID__7E37BEF6">
+            <fk name="FK__CaseFan__PartID__00200768">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="CaseFan" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__CaseFan__PartID__7E37BEF6" id="LINK_FK_FK__CaseFan__PartID__7E37BEF6_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="CaseFan" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__CaseFan__PartID__00200768" id="LINK_FK_FK__CaseFan__PartID__00200768_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="CaseFan" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -79,10 +82,10 @@
             <column dbComment="" dbDefaultValue="" dbName="side_panel" dbNotNull="false" dbPosition="5" dbSize="100" dbTypeName="varchar" inputType="text" javaName="sidePanel" javaType="java.lang.String" jdbcTypeCode="12" label="Side panel" maxLength="100" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="external_volume" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="decimal" inputType="number" javaName="externalVolume" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="External volume" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="internal_35_bays" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="int" inputType="number" javaName="internal35Bays" javaType="java.lang.Integer" jdbcTypeCode="4" label="Internal 35 bays" notNull="false" selected="true"/>
-            <fk name="FK__Cases__PartID__59063A47">
+            <fk name="FK__Cases__PartID__5AEE82B9">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Cases" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Cases__PartID__59063A47" id="LINK_FK_FK__Cases__PartID__59063A47_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Cases" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Cases__PartID__5AEE82B9" id="LINK_FK_FK__Cases__PartID__5AEE82B9_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Cases" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -91,8 +94,8 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Components" name="Components" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="ComponentID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="componentid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Componentid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="ComponentName" dbNotNull="true" dbPosition="2" dbSize="100" dbTypeName="varchar" inputType="text" javaName="componentname" javaType="java.lang.String" jdbcTypeCode="12" label="Componentname" maxLength="100" notEmpty="true" notNull="true" selected="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__Compone__3F466844" id="LINK_FK_FK__PCBuild__Compone__3F466844_I" inverseSideOf="LINK_FK_FK__PCBuild__Compone__3F466844_O" javaName="listOfPcbuild" javaType="unused" joinTableName="" mappedBy="components" optional="" owningSide="false" sourceTableName="Components" targetEntity="Pcbuild" targetTableName="PCBuild" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Parts__Component__4316F928" id="LINK_FK_FK__Parts__Component__4316F928_I" inverseSideOf="LINK_FK_FK__Parts__Component__4316F928_O" javaName="listOfParts" javaType="unused" joinTableName="" mappedBy="components" optional="" owningSide="false" sourceTableName="Components" targetEntity="Parts" targetTableName="Parts" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__Compone__412EB0B6" id="LINK_FK_FK__PCBuild__Compone__412EB0B6_I" inverseSideOf="LINK_FK_FK__PCBuild__Compone__412EB0B6_O" javaName="listOfPcbuild" javaType="unused" joinTableName="" mappedBy="components" optional="" owningSide="false" sourceTableName="Components" targetEntity="Pcbuild" targetTableName="PCBuild" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Parts__Component__44FF419A" id="LINK_FK_FK__Parts__Component__44FF419A_I" inverseSideOf="LINK_FK_FK__Parts__Component__44FF419A_O" javaName="listOfParts" javaType="unused" joinTableName="" mappedBy="components" optional="" owningSide="false" sourceTableName="Components" targetEntity="Parts" targetTableName="Parts" used="true"/>
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Externalharddrive" name="ExternalHardDrive" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
@@ -101,10 +104,10 @@
             <column dbComment="" dbDefaultValue="" dbName="capacity" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="capacity" javaType="java.lang.Integer" jdbcTypeCode="4" label="Capacity" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="decimal" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Price per gb" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__ExternalH__PartI__06CD04F7">
+            <fk name="FK__ExternalH__PartI__08B54D69">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="ExternalHardDrive" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__ExternalH__PartI__06CD04F7" id="LINK_FK_FK__ExternalH__PartI__06CD04F7_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="ExternalHardDrive" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__ExternalH__PartI__08B54D69" id="LINK_FK_FK__ExternalH__PartI__08B54D69_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="ExternalHardDrive" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -113,14 +116,14 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Fancontroller" name="FanController" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="channels" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="int" inputType="number" javaName="channels" javaType="java.lang.Integer" jdbcTypeCode="4" label="Channels" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="channel_wattage" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="channelWattage" javaType="java.lang.Integer" jdbcTypeCode="4" label="Channel wattage" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="channel_wattage" dbNotNull="false" dbPosition="3" dbSize="5" dbTypeName="decimal" inputType="number" javaName="channelWattage" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Channel wattage" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="pwm" dbNotNull="false" dbPosition="4" dbSize="1" dbTypeName="bit" inputType="checkbox" javaName="pwm" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Pwm" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="form_factor" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="formFactor" javaType="java.lang.String" jdbcTypeCode="12" label="Form factor" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__FanContro__PartI__01142BA1">
+            <fk name="FK__FanContro__PartI__02FC7413">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="FanController" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__FanContro__PartI__01142BA1" id="LINK_FK_FK__FanContro__PartI__01142BA1_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="FanController" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__FanContro__PartI__02FC7413" id="LINK_FK_FK__FanContro__PartI__02FC7413_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="FanController" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -134,10 +137,10 @@
             <column dbComment="" dbDefaultValue="" dbName="wireless" dbNotNull="false" dbPosition="5" dbSize="1" dbTypeName="bit" inputType="checkbox" javaName="wireless" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Wireless" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="enclosure_type" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="enclosureType" javaType="java.lang.String" jdbcTypeCode="12" label="Enclosure type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="7" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__Headphone__PartI__6D0D32F4">
+            <fk name="FK__Headphone__PartI__6EF57B66">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Headphones" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Headphone__PartI__6D0D32F4" id="LINK_FK_FK__Headphone__PartI__6D0D32F4_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Headphones" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Headphone__PartI__6EF57B66" id="LINK_FK_FK__Headphone__PartI__6EF57B66_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Headphones" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -145,16 +148,16 @@
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Internalharddrive" name="InternalHardDrive" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="capacity" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="int" inputType="number" javaName="capacity" javaType="java.lang.Integer" jdbcTypeCode="4" label="Capacity" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="decimal" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Price per gb" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="capacity" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="decimal" inputType="number" javaName="capacity" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Capacity" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="3" dbSize="18" dbTypeName="decimal" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Price per gb" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="type" dbNotNull="false" dbPosition="4" dbSize="50" dbTypeName="varchar" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="12" label="Type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="cache" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="cache" javaType="java.lang.Integer" jdbcTypeCode="4" label="Cache" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="form_factor" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="formFactor" javaType="java.lang.String" jdbcTypeCode="12" label="Form factor" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="interface" dbNotNull="false" dbPosition="7" dbSize="50" dbTypeName="varchar" inputType="text" javaName="interface" javaType="java.lang.String" jdbcTypeCode="12" label="Interface" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__InternalH__PartI__534D60F1">
+            <fk name="FK__InternalH__PartI__5535A963">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="InternalHardDrive" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__InternalH__PartI__534D60F1" id="LINK_FK_FK__InternalH__PartI__534D60F1_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="InternalHardDrive" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__InternalH__PartI__5535A963" id="LINK_FK_FK__InternalH__PartI__5535A963_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="InternalHardDrive" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -168,10 +171,10 @@
             <column dbComment="" dbDefaultValue="" dbName="tenkeyless" dbNotNull="false" dbPosition="5" dbSize="1" dbTypeName="bit" inputType="checkbox" javaName="tenkeyless" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Tenkeyless" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="connection_type" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="connectionType" javaType="java.lang.String" jdbcTypeCode="12" label="Connection type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="7" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__Keyboard__PartID__6FE99F9F">
+            <fk name="FK__Keyboard__PartID__71D1E811">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Keyboard" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Keyboard__PartID__6FE99F9F" id="LINK_FK_FK__Keyboard__PartID__6FE99F9F_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Keyboard" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Keyboard__PartID__71D1E811" id="LINK_FK_FK__Keyboard__PartID__71D1E811_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Keyboard" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -184,11 +187,11 @@
             <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="decimal" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Price per gb" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="first_word_latency" dbNotNull="false" dbPosition="6" dbSize="5" dbTypeName="decimal" inputType="number" javaName="firstWordLatency" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="First word latency" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="cas_latency" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="int" inputType="number" javaName="casLatency" javaType="java.lang.Integer" jdbcTypeCode="4" label="Cas latency" notNull="false" selected="true"/>
-            <fk name="FK__Memory__PartID__5070F446">
+            <column dbComment="" dbDefaultValue="" dbName="cas_latency" dbNotNull="false" dbPosition="7" dbSize="4" dbTypeName="decimal" inputType="number" javaName="casLatency" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Cas latency" notNull="false" selected="true"/>
+            <fk name="FK__Memory__PartID__52593CB8">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Memory" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Memory__PartID__5070F446" id="LINK_FK_FK__Memory__PartID__5070F446_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Memory" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Memory__PartID__52593CB8" id="LINK_FK_FK__Memory__PartID__52593CB8_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Memory" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -202,10 +205,10 @@
             <column dbComment="" dbDefaultValue="" dbName="response_time" dbNotNull="false" dbPosition="5" dbSize="4" dbTypeName="decimal" inputType="number" javaName="responseTime" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Response time" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="panel_type" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="panelType" javaType="java.lang.String" jdbcTypeCode="12" label="Panel type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="aspect_ratio" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="varchar" inputType="text" javaName="aspectRatio" javaType="java.lang.String" jdbcTypeCode="12" label="Aspect ratio" maxLength="10" notNull="false" selected="true"/>
-            <fk name="FK__Monitor__PartID__619B8048">
+            <fk name="FK__Monitor__PartID__6383C8BA">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Monitor" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Monitor__PartID__619B8048" id="LINK_FK_FK__Monitor__PartID__619B8048_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Monitor" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Monitor__PartID__6383C8BA" id="LINK_FK_FK__Monitor__PartID__6383C8BA_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Monitor" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -218,10 +221,10 @@
             <column dbComment="" dbDefaultValue="" dbName="max_memory" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="maxMemory" javaType="java.lang.Integer" jdbcTypeCode="4" label="Max memory" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="memory_slots" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="memorySlots" javaType="java.lang.Integer" jdbcTypeCode="4" label="Memory slots" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__MotherBoa__PartI__4D94879B">
+            <fk name="FK__MotherBoa__PartI__4F7CD00D">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="MotherBoard" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__MotherBoa__PartI__4D94879B" id="LINK_FK_FK__MotherBoa__PartI__4D94879B_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="MotherBoard" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__MotherBoa__PartI__4F7CD00D" id="LINK_FK_FK__MotherBoa__PartI__4F7CD00D_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="MotherBoard" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -234,10 +237,10 @@
             <column dbComment="" dbDefaultValue="" dbName="max_dpi" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="maxDpi" javaType="java.lang.Integer" jdbcTypeCode="4" label="Max dpi" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="hand_orientation" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="varchar" inputType="text" javaName="handOrientation" javaType="java.lang.String" jdbcTypeCode="12" label="Hand orientation" maxLength="10" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__Mouse__PartID__72C60C4A">
+            <fk name="FK__Mouse__PartID__74AE54BC">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Mouse" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Mouse__PartID__72C60C4A" id="LINK_FK_FK__Mouse__PartID__72C60C4A_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Mouse" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Mouse__PartID__74AE54BC" id="LINK_FK_FK__Mouse__PartID__74AE54BC_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Mouse" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -247,10 +250,10 @@
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="mode" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="mode" javaType="java.lang.String" jdbcTypeCode="12" label="Mode" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="max_memory" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="maxMemory" javaType="java.lang.Integer" jdbcTypeCode="4" label="Max memory" notNull="false" selected="true"/>
-            <fk name="FK__OS__PartID__5EBF139D">
+            <fk name="FK__OS__PartID__60A75C0F">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="OS" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__OS__PartID__5EBF139D" id="LINK_FK_FK__OS__PartID__5EBF139D_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="OS" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__OS__PartID__60A75C0F" id="LINK_FK_FK__OS__PartID__60A75C0F_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="OS" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -264,10 +267,10 @@
             <column dbComment="" dbDefaultValue="" dbName="bd_write" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="bdWrite" javaType="java.lang.String" jdbcTypeCode="12" label="Bd write" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="dvd_write" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="dvdWrite" javaType="java.lang.String" jdbcTypeCode="12" label="Dvd write" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="cd_write" dbNotNull="false" dbPosition="7" dbSize="50" dbTypeName="varchar" inputType="text" javaName="cdWrite" javaType="java.lang.String" jdbcTypeCode="12" label="Cd write" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__OpticalDr__PartI__09A971A2">
+            <fk name="FK__OpticalDr__PartI__0B91BA14">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="OpticalDrive" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__OpticalDr__PartI__09A971A2" id="LINK_FK_FK__OpticalDr__PartI__09A971A2_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="OpticalDrive" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__OpticalDr__PartI__0B91BA14" id="LINK_FK_FK__OpticalDr__PartI__0B91BA14_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="OpticalDrive" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -277,20 +280,20 @@
             <column dbComment="" dbDefaultValue="" dbName="PCID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="pcid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Pcid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="ComponentID" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="componentid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Componentid" notNull="true" selected="true"/>
             <column dateType="DT" dbComment="" dbDefaultValue="(getdate())" dbName="CreatedAt" dbNotNull="false" dbPosition="3" dbSize="23" dbTypeName="datetime" inputType="" javaName="createdat" javaType="java.util.Date" jdbcTypeCode="93" label="Createdat" notNull="false" selected="true"/>
-            <fk name="FK__PCBuild__Compone__3F466844">
+            <fk name="FK__PCBuild__Compone__412EB0B6">
                 <fkcol colname="ComponentID" colref="ComponentID" deferrable="7" deleterule="3" sequence="1" tablename="PCBuild" tableref="Components" updaterule="3"/>
             </fk>
-            <fk name="FK__PCBuild__PCID__3E52440B">
+            <fk name="FK__PCBuild__PCID__403A8C7D">
                 <fkcol colname="PCID" colref="PCID" deferrable="7" deleterule="3" sequence="1" tablename="PCBuild" tableref="PCs" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__Compone__3F466844" id="LINK_FK_FK__PCBuild__Compone__3F466844_O" inverseSideOf="" javaName="components" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PCBuild" targetEntity="Components" targetTableName="Components" used="true">
-                <joinColumns>
-                    <joinColumn insertable="false" name="ComponentID" nullable="true" referencedColumnName="ComponentID" unique="false" updatable="false"/>
-                </joinColumns>
-            </link>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__PCID__3E52440B" id="LINK_FK_FK__PCBuild__PCID__3E52440B_O" inverseSideOf="" javaName="pcs" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PCBuild" targetEntity="Pcs" targetTableName="PCs" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__PCID__403A8C7D" id="LINK_FK_FK__PCBuild__PCID__403A8C7D_O" inverseSideOf="" javaName="pcs" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PCBuild" targetEntity="Pcs" targetTableName="PCs" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PCID" nullable="true" referencedColumnName="PCID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__Compone__412EB0B6" id="LINK_FK_FK__PCBuild__Compone__412EB0B6_O" inverseSideOf="" javaName="components" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PCBuild" targetEntity="Components" targetTableName="Components" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="ComponentID" nullable="true" referencedColumnName="ComponentID" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
         </table>
@@ -298,54 +301,54 @@
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="PCID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="pcid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Pcid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="PCName" dbNotNull="true" dbPosition="2" dbSize="256" dbTypeName="varchar" inputType="text" javaName="pcname" javaType="java.lang.String" jdbcTypeCode="12" label="Pcname" maxLength="256" notEmpty="true" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="AccountID" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="accountid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Accountid" notNull="true" selected="true"/>
-            <fk name="FK__PCs__AccountID__3B75D760">
+            <fk name="FK__PCs__AccountID__3D5E1FD2">
                 <fkcol colname="AccountID" colref="AccountID" deferrable="7" deleterule="3" sequence="1" tablename="PCs" tableref="Accounts" updaterule="3"/>
             </fk>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__PCID__3E52440B" id="LINK_FK_FK__PCBuild__PCID__3E52440B_I" inverseSideOf="LINK_FK_FK__PCBuild__PCID__3E52440B_O" javaName="listOfPcbuild" javaType="unused" joinTableName="" mappedBy="pcs" optional="" owningSide="false" sourceTableName="PCs" targetEntity="Pcbuild" targetTableName="PCBuild" used="true"/>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCs__AccountID__3B75D760" id="LINK_FK_FK__PCs__AccountID__3B75D760_O" inverseSideOf="" javaName="accounts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PCs" targetEntity="Accounts" targetTableName="Accounts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCs__AccountID__3D5E1FD2" id="LINK_FK_FK__PCs__AccountID__3D5E1FD2_O" inverseSideOf="" javaName="accounts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PCs" targetEntity="Accounts" targetTableName="Accounts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="AccountID" nullable="true" referencedColumnName="AccountID" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__PCID__403A8C7D" id="LINK_FK_FK__PCBuild__PCID__403A8C7D_I" inverseSideOf="LINK_FK_FK__PCBuild__PCID__403A8C7D_O" javaName="listOfPcbuild" javaType="unused" joinTableName="" mappedBy="pcs" optional="" owningSide="false" sourceTableName="PCs" targetEntity="Pcbuild" targetTableName="PCBuild" used="true"/>
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Parts" name="Parts" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="PartName" dbNotNull="true" dbPosition="2" dbSize="256" dbTypeName="varchar" inputType="text" javaName="partname" javaType="java.lang.String" jdbcTypeCode="12" label="Partname" maxLength="256" notEmpty="true" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="PartPrice" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="decimal" inputType="number" javaName="partprice" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Partprice" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="ComponentID" dbNotNull="true" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="componentid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Componentid" notNull="true" selected="true"/>
-            <fk name="FK__Parts__Component__4316F928">
+            <fk name="FK__Parts__Component__44FF419A">
                 <fkcol colname="ComponentID" colref="ComponentID" deferrable="7" deleterule="3" sequence="1" tablename="Parts" tableref="Components" updaterule="3"/>
             </fk>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Mouse__PartID__72C60C4A" id="LINK_FK_FK__Mouse__PartID__72C60C4A_I" inverseSideOf="LINK_FK_FK__Mouse__PartID__72C60C4A_O" javaName="listOfMouse" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Mouse" targetTableName="Mouse" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__WirelessN__PartI__6A30C649" id="LINK_FK_FK__WirelessN__PartI__6A30C649_I" inverseSideOf="LINK_FK_FK__WirelessN__PartI__6A30C649_O" javaName="listOfWirelessnetworkcard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Wirelessnetworkcard" targetTableName="WirelessNetworkCard" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__CaseAcces__PartI__7B5B524B" id="LINK_FK_FK__CaseAcces__PartI__7B5B524B_I" inverseSideOf="LINK_FK_FK__CaseAcces__PartI__7B5B524B_O" javaName="listOfCaseaccessory" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Caseaccessory" targetTableName="CaseAccessory" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PowerSupp__PartI__5BE2A6F2" id="LINK_FK_FK__PowerSupp__PartI__5BE2A6F2_I" inverseSideOf="LINK_FK_FK__PowerSupp__PartI__5BE2A6F2_O" javaName="listOfPowersupply" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Powersupply" targetTableName="PowerSupply" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__FanContro__PartI__01142BA1" id="LINK_FK_FK__FanContro__PartI__01142BA1_I" inverseSideOf="LINK_FK_FK__FanContro__PartI__01142BA1_O" javaName="listOfFancontroller" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Fancontroller" targetTableName="FanController" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__MotherBoa__PartI__4D94879B" id="LINK_FK_FK__MotherBoa__PartI__4D94879B_I" inverseSideOf="LINK_FK_FK__MotherBoa__PartI__4D94879B_O" javaName="listOfMotherboard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Motherboard" targetTableName="MotherBoard" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Webcam__PartID__787EE5A0" id="LINK_FK_FK__Webcam__PartID__787EE5A0_I" inverseSideOf="LINK_FK_FK__Webcam__PartID__787EE5A0_O" javaName="listOfWebcam" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Webcam" targetTableName="Webcam" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__CPUCooler__PartI__4AB81AF0" id="LINK_FK_FK__CPUCooler__PartI__4AB81AF0_I" inverseSideOf="LINK_FK_FK__CPUCooler__PartI__4AB81AF0_O" javaName="listOfCpucooler" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Cpucooler" targetTableName="CPUCooler" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__OpticalDr__PartI__09A971A2" id="LINK_FK_FK__OpticalDr__PartI__09A971A2_I" inverseSideOf="LINK_FK_FK__OpticalDr__PartI__09A971A2_O" javaName="listOfOpticaldrive" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Opticaldrive" targetTableName="OpticalDrive" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Monitor__PartID__619B8048" id="LINK_FK_FK__Monitor__PartID__619B8048_I" inverseSideOf="LINK_FK_FK__Monitor__PartID__619B8048_O" javaName="listOfMonitor" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Monitor" targetTableName="Monitor" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__InternalH__PartI__534D60F1" id="LINK_FK_FK__InternalH__PartI__534D60F1_I" inverseSideOf="LINK_FK_FK__InternalH__PartI__534D60F1_O" javaName="listOfInternalharddrive" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Internalharddrive" targetTableName="InternalHardDrive" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__VideoCard__PartI__5629CD9C" id="LINK_FK_FK__VideoCard__PartI__5629CD9C_I" inverseSideOf="LINK_FK_FK__VideoCard__PartI__5629CD9C_O" javaName="listOfVideocard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Videocard" targetTableName="VideoCard" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__ThermalPa__PartI__03F0984C" id="LINK_FK_FK__ThermalPa__PartI__03F0984C_I" inverseSideOf="LINK_FK_FK__ThermalPa__PartI__03F0984C_O" javaName="listOfThermalpaste" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Thermalpaste" targetTableName="ThermalPaste" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__CPU__PartID__47DBAE45" id="LINK_FK_FK__CPU__PartID__47DBAE45_I" inverseSideOf="LINK_FK_FK__CPU__PartID__47DBAE45_O" javaName="listOfCpu" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Cpu" targetTableName="CPU" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__OS__PartID__5EBF139D" id="LINK_FK_FK__OS__PartID__5EBF139D_I" inverseSideOf="LINK_FK_FK__OS__PartID__5EBF139D_O" javaName="listOfOs" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Os" targetTableName="OS" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__CaseFan__PartID__7E37BEF6" id="LINK_FK_FK__CaseFan__PartID__7E37BEF6_I" inverseSideOf="LINK_FK_FK__CaseFan__PartID__7E37BEF6_O" javaName="listOfCasefan" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Casefan" targetTableName="CaseFan" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Ups__PartID__0C85DE4D" id="LINK_FK_FK__Ups__PartID__0C85DE4D_I" inverseSideOf="LINK_FK_FK__Ups__PartID__0C85DE4D_O" javaName="listOfUps" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Ups" targetTableName="Ups" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__ExternalH__PartI__06CD04F7" id="LINK_FK_FK__ExternalH__PartI__06CD04F7_I" inverseSideOf="LINK_FK_FK__ExternalH__PartI__06CD04F7_O" javaName="listOfExternalharddrive" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Externalharddrive" targetTableName="ExternalHardDrive" used="true"/>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Parts__Component__4316F928" id="LINK_FK_FK__Parts__Component__4316F928_O" inverseSideOf="" javaName="components" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Parts" targetEntity="Components" targetTableName="Components" used="true">
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Memory__PartID__52593CB8" id="LINK_FK_FK__Memory__PartID__52593CB8_I" inverseSideOf="LINK_FK_FK__Memory__PartID__52593CB8_O" javaName="listOfMemory" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Memory" targetTableName="Memory" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__ExternalH__PartI__08B54D69" id="LINK_FK_FK__ExternalH__PartI__08B54D69_I" inverseSideOf="LINK_FK_FK__ExternalH__PartI__08B54D69_O" javaName="listOfExternalharddrive" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Externalharddrive" targetTableName="ExternalHardDrive" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__OpticalDr__PartI__0B91BA14" id="LINK_FK_FK__OpticalDr__PartI__0B91BA14_I" inverseSideOf="LINK_FK_FK__OpticalDr__PartI__0B91BA14_O" javaName="listOfOpticaldrive" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Opticaldrive" targetTableName="OpticalDrive" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Webcam__PartID__7A672E12" id="LINK_FK_FK__Webcam__PartID__7A672E12_I" inverseSideOf="LINK_FK_FK__Webcam__PartID__7A672E12_O" javaName="listOfWebcam" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Webcam" targetTableName="Webcam" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Mouse__PartID__74AE54BC" id="LINK_FK_FK__Mouse__PartID__74AE54BC_I" inverseSideOf="LINK_FK_FK__Mouse__PartID__74AE54BC_O" javaName="listOfMouse" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Mouse" targetTableName="Mouse" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__CaseFan__PartID__00200768" id="LINK_FK_FK__CaseFan__PartID__00200768_I" inverseSideOf="LINK_FK_FK__CaseFan__PartID__00200768_O" javaName="listOfCasefan" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Casefan" targetTableName="CaseFan" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__CPU__PartID__49C3F6B7" id="LINK_FK_FK__CPU__PartID__49C3F6B7_I" inverseSideOf="LINK_FK_FK__CPU__PartID__49C3F6B7_O" javaName="listOfCpu" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Cpu" targetTableName="CPU" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__WirelessN__PartI__6C190EBB" id="LINK_FK_FK__WirelessN__PartI__6C190EBB_I" inverseSideOf="LINK_FK_FK__WirelessN__PartI__6C190EBB_O" javaName="listOfWirelessnetworkcard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Wirelessnetworkcard" targetTableName="WirelessNetworkCard" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Speakers__PartID__778AC167" id="LINK_FK_FK__Speakers__PartID__778AC167_I" inverseSideOf="LINK_FK_FK__Speakers__PartID__778AC167_O" javaName="listOfSpeakers" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Speakers" targetTableName="Speakers" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Headphone__PartI__6EF57B66" id="LINK_FK_FK__Headphone__PartI__6EF57B66_I" inverseSideOf="LINK_FK_FK__Headphone__PartI__6EF57B66_O" javaName="listOfHeadphones" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Headphones" targetTableName="Headphones" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__CPUCooler__PartI__4CA06362" id="LINK_FK_FK__CPUCooler__PartI__4CA06362_I" inverseSideOf="LINK_FK_FK__CPUCooler__PartI__4CA06362_O" javaName="listOfCpucooler" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Cpucooler" targetTableName="CPUCooler" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Ups__PartID__0E6E26BF" id="LINK_FK_FK__Ups__PartID__0E6E26BF_I" inverseSideOf="LINK_FK_FK__Ups__PartID__0E6E26BF_O" javaName="listOfUps" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Ups" targetTableName="Ups" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__ThermalPa__PartI__05D8E0BE" id="LINK_FK_FK__ThermalPa__PartI__05D8E0BE_I" inverseSideOf="LINK_FK_FK__ThermalPa__PartI__05D8E0BE_O" javaName="listOfThermalpaste" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Thermalpaste" targetTableName="ThermalPaste" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Monitor__PartID__6383C8BA" id="LINK_FK_FK__Monitor__PartID__6383C8BA_I" inverseSideOf="LINK_FK_FK__Monitor__PartID__6383C8BA_O" javaName="listOfMonitor" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Monitor" targetTableName="Monitor" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__VideoCard__PartI__5812160E" id="LINK_FK_FK__VideoCard__PartI__5812160E_I" inverseSideOf="LINK_FK_FK__VideoCard__PartI__5812160E_O" javaName="listOfVideocard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Videocard" targetTableName="VideoCard" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__MotherBoa__PartI__4F7CD00D" id="LINK_FK_FK__MotherBoa__PartI__4F7CD00D_I" inverseSideOf="LINK_FK_FK__MotherBoa__PartI__4F7CD00D_O" javaName="listOfMotherboard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Motherboard" targetTableName="MotherBoard" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PowerSupp__PartI__5DCAEF64" id="LINK_FK_FK__PowerSupp__PartI__5DCAEF64_I" inverseSideOf="LINK_FK_FK__PowerSupp__PartI__5DCAEF64_O" javaName="listOfPowersupply" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Powersupply" targetTableName="PowerSupply" used="true"/>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Parts__Component__44FF419A" id="LINK_FK_FK__Parts__Component__44FF419A_O" inverseSideOf="" javaName="components" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Parts" targetEntity="Components" targetTableName="Components" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="ComponentID" nullable="true" referencedColumnName="ComponentID" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Keyboard__PartID__6FE99F9F" id="LINK_FK_FK__Keyboard__PartID__6FE99F9F_I" inverseSideOf="LINK_FK_FK__Keyboard__PartID__6FE99F9F_O" javaName="listOfKeyboard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Keyboard" targetTableName="Keyboard" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Memory__PartID__5070F446" id="LINK_FK_FK__Memory__PartID__5070F446_I" inverseSideOf="LINK_FK_FK__Memory__PartID__5070F446_O" javaName="listOfMemory" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Memory" targetTableName="Memory" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__SoundCard__PartI__6477ECF3" id="LINK_FK_FK__SoundCard__PartI__6477ECF3_I" inverseSideOf="LINK_FK_FK__SoundCard__PartI__6477ECF3_O" javaName="listOfSoundcard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Soundcard" targetTableName="SoundCard" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Headphone__PartI__6D0D32F4" id="LINK_FK_FK__Headphone__PartI__6D0D32F4_I" inverseSideOf="LINK_FK_FK__Headphone__PartI__6D0D32F4_O" javaName="listOfHeadphones" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Headphones" targetTableName="Headphones" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Speakers__PartID__75A278F5" id="LINK_FK_FK__Speakers__PartID__75A278F5_I" inverseSideOf="LINK_FK_FK__Speakers__PartID__75A278F5_O" javaName="listOfSpeakers" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Speakers" targetTableName="Speakers" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Cases__PartID__59063A47" id="LINK_FK_FK__Cases__PartID__59063A47_I" inverseSideOf="LINK_FK_FK__Cases__PartID__59063A47_O" javaName="listOfCases" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Cases" targetTableName="Cases" used="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__WiredNetw__PartI__6754599E" id="LINK_FK_FK__WiredNetw__PartI__6754599E_I" inverseSideOf="LINK_FK_FK__WiredNetw__PartI__6754599E_O" javaName="listOfWirednetworkcard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Wirednetworkcard" targetTableName="WiredNetworkCard" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__OS__PartID__60A75C0F" id="LINK_FK_FK__OS__PartID__60A75C0F_I" inverseSideOf="LINK_FK_FK__OS__PartID__60A75C0F_O" javaName="listOfOs" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Os" targetTableName="OS" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__InternalH__PartI__5535A963" id="LINK_FK_FK__InternalH__PartI__5535A963_I" inverseSideOf="LINK_FK_FK__InternalH__PartI__5535A963_O" javaName="listOfInternalharddrive" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Internalharddrive" targetTableName="InternalHardDrive" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Cases__PartID__5AEE82B9" id="LINK_FK_FK__Cases__PartID__5AEE82B9_I" inverseSideOf="LINK_FK_FK__Cases__PartID__5AEE82B9_O" javaName="listOfCases" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Cases" targetTableName="Cases" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__WiredNetw__PartI__693CA210" id="LINK_FK_FK__WiredNetw__PartI__693CA210_I" inverseSideOf="LINK_FK_FK__WiredNetw__PartI__693CA210_O" javaName="listOfWirednetworkcard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Wirednetworkcard" targetTableName="WiredNetworkCard" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__SoundCard__PartI__66603565" id="LINK_FK_FK__SoundCard__PartI__66603565_I" inverseSideOf="LINK_FK_FK__SoundCard__PartI__66603565_O" javaName="listOfSoundcard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Soundcard" targetTableName="SoundCard" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__FanContro__PartI__02FC7413" id="LINK_FK_FK__FanContro__PartI__02FC7413_I" inverseSideOf="LINK_FK_FK__FanContro__PartI__02FC7413_O" javaName="listOfFancontroller" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Fancontroller" targetTableName="FanController" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__CaseAcces__PartI__7D439ABD" id="LINK_FK_FK__CaseAcces__PartI__7D439ABD_I" inverseSideOf="LINK_FK_FK__CaseAcces__PartI__7D439ABD_O" javaName="listOfCaseaccessory" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Caseaccessory" targetTableName="CaseAccessory" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Keyboard__PartID__71D1E811" id="LINK_FK_FK__Keyboard__PartID__71D1E811_I" inverseSideOf="LINK_FK_FK__Keyboard__PartID__71D1E811_O" javaName="listOfKeyboard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Keyboard" targetTableName="Keyboard" used="true"/>
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Powersupply" name="PowerSupply" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
@@ -354,10 +357,10 @@
             <column dbComment="" dbDefaultValue="" dbName="wattage" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="wattage" javaType="java.lang.Integer" jdbcTypeCode="4" label="Wattage" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="modular" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="modular" javaType="java.lang.String" jdbcTypeCode="12" label="Modular" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__PowerSupp__PartI__5BE2A6F2">
+            <fk name="FK__PowerSupp__PartI__5DCAEF64">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="PowerSupply" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PowerSupp__PartI__5BE2A6F2" id="LINK_FK_FK__PowerSupp__PartI__5BE2A6F2_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PowerSupply" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PowerSupp__PartI__5DCAEF64" id="LINK_FK_FK__PowerSupp__PartI__5DCAEF64_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PowerSupply" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -371,10 +374,10 @@
             <column dbComment="" dbDefaultValue="" dbName="sample_rate" dbNotNull="false" dbPosition="5" dbSize="5" dbTypeName="decimal" inputType="number" javaName="sampleRate" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Sample rate" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="chipset" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="chipset" javaType="java.lang.String" jdbcTypeCode="12" label="Chipset" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="interface" dbNotNull="false" dbPosition="7" dbSize="50" dbTypeName="varchar" inputType="text" javaName="interface" javaType="java.lang.String" jdbcTypeCode="12" label="Interface" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__SoundCard__PartI__6477ECF3">
+            <fk name="FK__SoundCard__PartI__66603565">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="SoundCard" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__SoundCard__PartI__6477ECF3" id="LINK_FK_FK__SoundCard__PartI__6477ECF3_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="SoundCard" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__SoundCard__PartI__66603565" id="LINK_FK_FK__SoundCard__PartI__66603565_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="SoundCard" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -386,10 +389,10 @@
             <column dbComment="" dbDefaultValue="" dbName="wattage" dbNotNull="false" dbPosition="3" dbSize="6" dbTypeName="decimal" inputType="number" javaName="wattage" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Wattage" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="frequency_response" dbNotNull="false" dbPosition="4" dbSize="50" dbTypeName="varchar" inputType="text" javaName="frequencyResponse" javaType="java.lang.String" jdbcTypeCode="12" label="Frequency response" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__Speakers__PartID__75A278F5">
+            <fk name="FK__Speakers__PartID__778AC167">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Speakers" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Speakers__PartID__75A278F5" id="LINK_FK_FK__Speakers__PartID__75A278F5_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Speakers" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Speakers__PartID__778AC167" id="LINK_FK_FK__Speakers__PartID__778AC167_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Speakers" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -398,10 +401,10 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Thermalpaste" name="ThermalPaste" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="amount" dbNotNull="false" dbPosition="2" dbSize="5" dbTypeName="decimal" inputType="number" javaName="amount" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Amount" notNull="false" selected="true"/>
-            <fk name="FK__ThermalPa__PartI__03F0984C">
+            <fk name="FK__ThermalPa__PartI__05D8E0BE">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="ThermalPaste" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__ThermalPa__PartI__03F0984C" id="LINK_FK_FK__ThermalPa__PartI__03F0984C_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="ThermalPaste" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__ThermalPa__PartI__05D8E0BE" id="LINK_FK_FK__ThermalPa__PartI__05D8E0BE_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="ThermalPaste" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -417,10 +420,10 @@
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="capacity_w" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="int" inputType="number" javaName="capacityW" javaType="java.lang.Integer" jdbcTypeCode="4" label="Capacity w" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="capacity_va" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="capacityVa" javaType="java.lang.Integer" jdbcTypeCode="4" label="Capacity va" notNull="false" selected="true"/>
-            <fk name="FK__Ups__PartID__0C85DE4D">
+            <fk name="FK__Ups__PartID__0E6E26BF">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Ups" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Ups__PartID__0C85DE4D" id="LINK_FK_FK__Ups__PartID__0C85DE4D_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Ups" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Ups__PartID__0E6E26BF" id="LINK_FK_FK__Ups__PartID__0E6E26BF_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Ups" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -429,15 +432,15 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Videocard" name="VideoCard" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="chipset" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="chipset" javaType="java.lang.String" jdbcTypeCode="12" label="Chipset" maxLength="50" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="memory" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="memory" javaType="java.lang.Integer" jdbcTypeCode="4" label="Memory" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="memory" dbNotNull="false" dbPosition="3" dbSize="4" dbTypeName="decimal" inputType="number" javaName="memory" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Memory" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="core_clock" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="coreClock" javaType="java.lang.Integer" jdbcTypeCode="4" label="Core clock" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="boost_clock" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="boostClock" javaType="java.lang.Integer" jdbcTypeCode="4" label="Boost clock" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="length" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="int" inputType="number" javaName="length" javaType="java.lang.Integer" jdbcTypeCode="4" label="Length" notNull="false" selected="true"/>
-            <fk name="FK__VideoCard__PartI__5629CD9C">
+            <fk name="FK__VideoCard__PartI__5812160E">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="VideoCard" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__VideoCard__PartI__5629CD9C" id="LINK_FK_FK__VideoCard__PartI__5629CD9C_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="VideoCard" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__VideoCard__PartI__5812160E" id="LINK_FK_FK__VideoCard__PartI__5812160E_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="VideoCard" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -449,11 +452,11 @@
             <column dbComment="" dbDefaultValue="" dbName="connection" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="connection" javaType="java.lang.String" jdbcTypeCode="12" label="Connection" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="focus_type" dbNotNull="false" dbPosition="4" dbSize="50" dbTypeName="varchar" inputType="text" javaName="focusType" javaType="java.lang.String" jdbcTypeCode="12" label="Focus type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="os" dbNotNull="false" dbPosition="5" dbSize="100" dbTypeName="varchar" inputType="text" javaName="os" javaType="java.lang.String" jdbcTypeCode="12" label="Os" maxLength="100" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="fov" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="int" inputType="number" javaName="fov" javaType="java.lang.Integer" jdbcTypeCode="4" label="Fov" notNull="false" selected="true"/>
-            <fk name="FK__Webcam__PartID__787EE5A0">
+            <column dbComment="" dbDefaultValue="" dbName="fov" dbNotNull="false" dbPosition="6" dbSize="5" dbTypeName="decimal" inputType="number" javaName="fov" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Fov" notNull="false" selected="true"/>
+            <fk name="FK__Webcam__PartID__7A672E12">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Webcam" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Webcam__PartID__787EE5A0" id="LINK_FK_FK__Webcam__PartID__787EE5A0_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Webcam" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__Webcam__PartID__7A672E12" id="LINK_FK_FK__Webcam__PartID__7A672E12_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="Webcam" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -463,10 +466,10 @@
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="interface" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="interface" javaType="java.lang.String" jdbcTypeCode="12" label="Interface" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__WiredNetw__PartI__6754599E">
+            <fk name="FK__WiredNetw__PartI__693CA210">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="WiredNetworkCard" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__WiredNetw__PartI__6754599E" id="LINK_FK_FK__WiredNetw__PartI__6754599E_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="WiredNetworkCard" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__WiredNetw__PartI__693CA210" id="LINK_FK_FK__WiredNetw__PartI__693CA210_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="WiredNetworkCard" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
@@ -477,10 +480,10 @@
             <column dbComment="" dbDefaultValue="" dbName="protocol" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="protocol" javaType="java.lang.String" jdbcTypeCode="12" label="Protocol" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="interface" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="interface" javaType="java.lang.String" jdbcTypeCode="12" label="Interface" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="4" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <fk name="FK__WirelessN__PartI__6A30C649">
+            <fk name="FK__WirelessN__PartI__6C190EBB">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="WirelessNetworkCard" tableref="Parts" updaterule="3"/>
             </fk>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__WirelessN__PartI__6A30C649" id="LINK_FK_FK__WirelessN__PartI__6A30C649_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="WirelessNetworkCard" targetEntity="Parts" targetTableName="Parts" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__WirelessN__PartI__6C190EBB" id="LINK_FK_FK__WirelessN__PartI__6C190EBB_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="WirelessNetworkCard" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
