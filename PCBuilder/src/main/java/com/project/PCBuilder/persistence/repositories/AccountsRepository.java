@@ -4,6 +4,8 @@
  */
 package com.project.PCBuilder.persistence.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.project.PCBuilder.persistence.entities.Accounts;
@@ -23,6 +25,8 @@ import com.project.PCBuilder.persistence.entities.Accounts;
  * @author Telosys
  */
 public interface AccountsRepository extends JpaRepository<Accounts, Integer> {
+	Optional<Accounts> findByEmail(String email);
+	Optional<Accounts> findByToken(String token);
 
     // -- Add your custom finder methods below --
 

@@ -9,10 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.PCBuilder.rest.dto.AccountsDTO;
+import com.project.PCBuilder.rest.dto.LoginRequest;
 import com.project.PCBuilder.rest.services.AccountsService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -22,6 +29,11 @@ public class AccountsRestController {
     private static final Logger logger = LoggerFactory.getLogger(AccountsRestController.class);
 
     private final AccountsService service;
+
+@Autowired
+private BCryptPasswordEncoder encoder;
+@Autowired
+private JavaMailSender mailSender;
 
     @Autowired
     public AccountsRestController(AccountsService service) {
@@ -87,5 +99,48 @@ public class AccountsRestController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+ // 1) Sign up
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody AccountsDTO dto){
+      if (!service.register(dto))
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already in use");
+      // send verification email
+      String link = "http://localhost:8080/api/v1/accounts/verify/" + dto.getToken();
+      SimpleMailMessage msg = new SimpleMailMessage();
+      msg.setTo(dto.getEmail());
+      msg.setSubject("Please verify your email");
+      msg.setText("Click to verify: " + link);
+      mailSender.send(msg);
+      return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    // 2) Verify
+    @GetMapping("/verify/{token}")
+    public ResponseEntity<String> verify(@PathVariable String token) {
+      return service.verifyEmail(token)
+        ? ResponseEntity.ok("Verified!")
+        : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired token");
+    }
+
+    // 3) Log in – create a session
+    @PostMapping("/login")
+    public ResponseEntity<String> login(
+        @RequestBody LoginRequest login,
+        HttpServletRequest request
+    ) {
+      try {
+        request.login(login.getEmail(), login.getPassword());
+        return ResponseEntity.ok("Logged in");
+      } catch (ServletException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Bad credentials");
+      }
+    }
+
+    // 4) Log out
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest req) throws ServletException {
+      req.logout();
+      return ResponseEntity.noContent().build();
     }
 }
