@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.HeadphonesDTO;
 import com.project.PCBuilder.rest.services.HeadphonesService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/headphones", produces = MediaType.APPLICATION_JSON_VALUE)
 public class HeadphonesRestController {

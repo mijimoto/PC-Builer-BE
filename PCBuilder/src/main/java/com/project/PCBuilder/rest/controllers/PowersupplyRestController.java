@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.PowersupplyDTO;
 import com.project.PCBuilder.rest.services.PowersupplyService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/powersupply", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PowersupplyRestController {

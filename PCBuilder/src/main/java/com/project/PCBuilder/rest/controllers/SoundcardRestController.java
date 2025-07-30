@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.SoundcardDTO;
 import com.project.PCBuilder.rest.services.SoundcardService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/soundcard", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SoundcardRestController {

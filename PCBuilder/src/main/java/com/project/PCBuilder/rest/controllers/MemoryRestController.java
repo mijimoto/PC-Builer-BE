@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.MemoryDTO;
 import com.project.PCBuilder.rest.services.MemoryService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/memory", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MemoryRestController {

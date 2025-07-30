@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.CpucoolerDTO;
 import com.project.PCBuilder.rest.services.CpucoolerService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/cpucooler", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CpucoolerRestController {

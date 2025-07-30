@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.PcbuildDTO;
 import com.project.PCBuilder.rest.services.PcbuildService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/pcbuild", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PcbuildRestController {

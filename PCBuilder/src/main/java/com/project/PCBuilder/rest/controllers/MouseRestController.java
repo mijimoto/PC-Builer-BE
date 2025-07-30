@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.MouseDTO;
 import com.project.PCBuilder.rest.services.MouseService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/mouse", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MouseRestController {

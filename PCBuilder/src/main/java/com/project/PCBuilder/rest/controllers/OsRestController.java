@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.OsDTO;
 import com.project.PCBuilder.rest.services.OsService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/os", produces = MediaType.APPLICATION_JSON_VALUE)
 public class OsRestController {

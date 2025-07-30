@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.SpeakersDTO;
 import com.project.PCBuilder.rest.services.SpeakersService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/speakers", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SpeakersRestController {

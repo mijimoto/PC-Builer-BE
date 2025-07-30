@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.VideocardDTO;
 import com.project.PCBuilder.rest.services.VideocardService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/videocard", produces = MediaType.APPLICATION_JSON_VALUE)
 public class VideocardRestController {

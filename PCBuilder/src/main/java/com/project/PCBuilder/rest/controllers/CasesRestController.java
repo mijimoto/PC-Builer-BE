@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.CasesDTO;
 import com.project.PCBuilder.rest.services.CasesService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/cases", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CasesRestController {

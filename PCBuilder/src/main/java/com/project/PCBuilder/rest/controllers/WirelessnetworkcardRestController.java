@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.WirelessnetworkcardDTO;
 import com.project.PCBuilder.rest.services.WirelessnetworkcardService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/wirelessnetworkcard", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WirelessnetworkcardRestController {

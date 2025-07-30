@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.MonitorDTO;
 import com.project.PCBuilder.rest.services.MonitorService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/monitor", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MonitorRestController {

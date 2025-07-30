@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.MotherboardDTO;
 import com.project.PCBuilder.rest.services.MotherboardService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/motherboard", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MotherboardRestController {

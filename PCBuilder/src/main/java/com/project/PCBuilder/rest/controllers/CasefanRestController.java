@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.CasefanDTO;
 import com.project.PCBuilder.rest.services.CasefanService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/casefan", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CasefanRestController {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.FancontrollerDTO;
 import com.project.PCBuilder.rest.services.FancontrollerService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/fancontroller", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FancontrollerRestController {

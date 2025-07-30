@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.WebcamDTO;
 import com.project.PCBuilder.rest.services.WebcamService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/webcam", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WebcamRestController {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.ExternalharddriveDTO;
 import com.project.PCBuilder.rest.services.ExternalharddriveService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/externalharddrive", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ExternalharddriveRestController {

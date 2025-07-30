@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.KeyboardDTO;
 import com.project.PCBuilder.rest.services.KeyboardService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/keyboard", produces = MediaType.APPLICATION_JSON_VALUE)
 public class KeyboardRestController {

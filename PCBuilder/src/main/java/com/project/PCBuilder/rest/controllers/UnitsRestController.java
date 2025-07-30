@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.UnitsDTO;
 import com.project.PCBuilder.rest.services.UnitsService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/units", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UnitsRestController {

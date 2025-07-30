@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.ThermalpasteDTO;
 import com.project.PCBuilder.rest.services.ThermalpasteService;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/thermalpaste", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ThermalpasteRestController {
