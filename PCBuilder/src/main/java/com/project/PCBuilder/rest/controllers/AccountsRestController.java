@@ -1,4 +1,5 @@
 
+
 package com.project.PCBuilder.rest.controllers;
 
 import java.util.List;
@@ -12,16 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.project.PCBuilder.rest.dto.AccountsDTO;
 import com.project.PCBuilder.rest.dto.LoginRequest;
@@ -30,7 +22,7 @@ import com.project.PCBuilder.rest.services.AccountsService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") 
 @RestController
 @RequestMapping(value = "/api/v1/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountsRestController {
@@ -70,6 +62,35 @@ private JavaMailSender mailSender;
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+    }
+    @PostMapping("/reset-password/request")
+    public ResponseEntity<String> requestReset(@RequestParam String email) {
+        if (!service.requestPasswordReset(email)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email not found or account not verified");
+        }
+
+        String token = service.getTokenByEmail(email);
+        String resetLink = "http://localhost:8080/reset-password?token=" + token;
+
+        // Send email
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(email);
+        msg.setSubject("Password Reset Request");
+        msg.setText("Click this link to reset your password: " + resetLink);
+        mailSender.send(msg);
+
+        return ResponseEntity.ok("Reset link sent to email");
+    }
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(
+        @RequestParam String token,
+        @RequestParam String newPassword
+    ) {
+        if (service.resetPassword(token, newPassword)) {
+            return ResponseEntity.ok("Password reset successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired token");
         }
     }
 
@@ -153,3 +174,4 @@ private JavaMailSender mailSender;
       return ResponseEntity.noContent().build();
     }
 }
+
