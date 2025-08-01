@@ -3,6 +3,7 @@
 package com.project.PCBuilder.rest.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,9 @@ import com.project.PCBuilder.rest.dto.LoginRequest;
 import com.project.PCBuilder.rest.services.AccountsService;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @CrossOrigin(origins = "*") 
 @RestController
@@ -153,18 +156,54 @@ private JavaMailSender mailSender;
         : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired token");
     }
 
-    // 3) Log in – create a session
     @PostMapping("/login")
-    public ResponseEntity<String> login(
-        @RequestBody LoginRequest login,
-        HttpServletRequest request
+    public ResponseEntity<?> login(
+        @RequestBody LoginRequest loginRequest,
+        HttpServletResponse response
     ) {
-      try {
-        request.login(login.getEmail(), login.getPassword());
-        return ResponseEntity.ok("Logged in");
-      } catch (ServletException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Bad credentials");
-      }
+        try {
+            System.out.println("Login attempt for email: " + loginRequest.getEmail());
+            
+            AccountsDTO account = service.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
+            
+            if (account == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Invalid email or password"));
+            }
+            
+            // Create session cookie
+            Cookie sessionCookie = new Cookie("accountid", account.getAccountid().toString());
+            sessionCookie.setHttpOnly(false);
+            sessionCookie.setSecure(false);
+            sessionCookie.setPath("/");
+            sessionCookie.setMaxAge(24 * 60 * 60);
+            
+            response.addCookie(sessionCookie);
+            response.setHeader("Set-Cookie", "accountid=" + account.getAccountid() + "; Path=/; Max-Age=86400");
+            
+            System.out.println("Login successful for: " + loginRequest.getEmail() + ", Account ID: " + account.getAccountid());
+            
+            return ResponseEntity.ok(Map.of(
+                "success", true,
+                "message", "Login successful",
+                "accountId", account.getAccountid(),
+                "email", account.getEmail(),
+                "firstName", account.getFirstname() != null ? account.getFirstname() : "",
+                "lastName", account.getLastname() != null ? account.getLastname() : ""
+            ));
+            
+        } catch (RuntimeException e) {
+            if ("ACCOUNT_NOT_VERIFIED".equals(e.getMessage())) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Map.of("error", "Account not verified. Please check your email."));
+            }
+            throw e;
+        } catch (Exception e) {
+            System.err.println("Login error: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "An error occurred during login"));
+        }
     }
 
     // 4) Log out
@@ -174,4 +213,3 @@ private JavaMailSender mailSender;
       return ResponseEntity.noContent().build();
     }
 }
-
