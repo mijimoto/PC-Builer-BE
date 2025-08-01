@@ -245,7 +245,30 @@ public class AccountsService extends GenericService<Accounts, AccountsDTO> {
 	    return true;
 	}
 
+	// Add this method to your AccountsService.java class:
 
+	public AccountsDTO authenticateUser(String email, String password) {
+	    Optional<Accounts> accountOpt = repository.findByEmail(email);
+	    
+	    if (accountOpt.isEmpty()) {
+	        return null; // User not found
+	    }
+	    
+	    Accounts account = accountOpt.get();
+	    
+	    // Check if account is verified
+	    if (!Boolean.TRUE.equals(account.getIsverified())) {
+	        throw new RuntimeException("ACCOUNT_NOT_VERIFIED");
+	    }
+	    
+	    // Check password
+	    if (!passwordEncoder.matches(password, account.getPasswordhased())) {
+	        return null; // Invalid password
+	    }
+	    
+	    // Return the account as DTO
+	    return entityToDto(Optional.of(account));
+	}
 
 	/**
 	 * Creates the given entity <br>
