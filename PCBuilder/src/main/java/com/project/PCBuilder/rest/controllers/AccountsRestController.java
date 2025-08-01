@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.AccountsDTO;
 import com.project.PCBuilder.rest.dto.LoginRequest;
 import com.project.PCBuilder.rest.services.AccountsService;
+import com.project.PCBuilder.security.CustomUserDetailsService;
+import com.project.PCBuilder.security.JwtUtil;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -39,10 +42,18 @@ private BCryptPasswordEncoder encoder;
 @Autowired
 private JavaMailSender mailSender;
 
-    @Autowired
-    public AccountsRestController(AccountsService service) {
-        this.service = service;
-    }
+private final JwtUtil jwtUtil;            // ← add
+private final CustomUserDetailsService uds; // ← add if you need it here
+
+
+@Autowired
+public AccountsRestController(AccountsService service,
+                              JwtUtil jwtUtil,
+                              CustomUserDetailsService uds) {
+    this.service = service;
+    this.jwtUtil = jwtUtil; // ✅ Use the injected bean — don't call constructor manually
+    this.uds = uds;         // ✅ Use the injected bean — don't assign null
+}
 
     @GetMapping
     public ResponseEntity<List<AccountsDTO>> findAll() {
@@ -157,54 +168,26 @@ private JavaMailSender mailSender;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(
-        @RequestBody LoginRequest loginRequest,
-        HttpServletResponse response
-    ) {
-        try {
-            System.out.println("Login attempt for email: " + loginRequest.getEmail());
-            
-            AccountsDTO account = service.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
-            
-            if (account == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Invalid email or password"));
-            }
-            
-            // Create session cookie
-            Cookie sessionCookie = new Cookie("accountid", account.getAccountid().toString());
-            sessionCookie.setHttpOnly(false);
-            sessionCookie.setSecure(false);
-            sessionCookie.setPath("/");
-            sessionCookie.setMaxAge(24 * 60 * 60);
-            
-            response.addCookie(sessionCookie);
-            response.setHeader("Set-Cookie", "accountid=" + account.getAccountid() + "; Path=/; Max-Age=86400");
-            
-            System.out.println("Login successful for: " + loginRequest.getEmail() + ", Account ID: " + account.getAccountid());
-            
-            return ResponseEntity.ok(Map.of(
-                "success", true,
-                "message", "Login successful",
-                "accountId", account.getAccountid(),
-                "email", account.getEmail(),
-                "firstName", account.getFirstname() != null ? account.getFirstname() : "",
-                "lastName", account.getLastname() != null ? account.getLastname() : ""
-            ));
-            
-        } catch (RuntimeException e) {
-            if ("ACCOUNT_NOT_VERIFIED".equals(e.getMessage())) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("error", "Account not verified. Please check your email."));
-            }
-            throw e;
-        } catch (Exception e) {
-            System.err.println("Login error: " + e.getMessage());
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("error", "An error occurred during login"));
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        AccountsDTO account = service.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
+        if (account == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error", "Invalid email or password"));
         }
+
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
+            account.getEmail(), account.getPasswordhased(), List.of());
+        String token = jwtUtil.generateToken(userDetails); // ✅ generate token
+
+        // ✅ return token so Flutter can save it
+        return ResponseEntity.ok(Map.of(
+            "token", token,
+            "accountId", account.getAccountid(),
+            "email", account.getEmail()
+        ));
     }
+
+
 
     // 4) Log out
     @PostMapping("/logout")

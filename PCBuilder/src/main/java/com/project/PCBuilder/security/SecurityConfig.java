@@ -12,30 +12,44 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
-    private final CustomUserDetailsService uds;
 
-    public SecurityConfig(CustomUserDetailsService uds) {
-        this.uds = uds;
+    private final CustomUserDetailsService uds;
+    private final JwtUtil jwtUtil;
+
+    public SecurityConfig(CustomUserDetailsService uds, JwtUtil jwtUtil) {
+        this.uds     = uds;
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf().disable()
-            .authorizeHttpRequests()
-                .requestMatchers("/api/v1/accounts/signup", "/api/v1/accounts/verify/**", "/api/v1/accounts/login").permitAll()
-                .anyRequest().permitAll()
-            .and()
-            .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-            .and()
-            .formLogin().disable()
-            .httpBasic().disable();
+          .cors(cors -> cors.configurationSource(corsConfigurationSource())).csrf().disable()
+          .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+          .authorizeHttpRequests()
+            .requestMatchers(
+              "/api/v1/accounts/signup",
+              "/api/v1/accounts/verify/**",
+              "/api/v1/accounts/login"
+            ).permitAll()
+            .anyRequest().authenticated()
+        .and()
+          .addFilterBefore(
+            jwtAuthenticationFilter(),
+            UsernamePasswordAuthenticationFilter.class
+          );
+
         return http.build();
+    }
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter(jwtUtil, uds);
     }
 
     @Bean
