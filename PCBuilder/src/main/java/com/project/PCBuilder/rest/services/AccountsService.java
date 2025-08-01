@@ -98,7 +98,6 @@ public class AccountsService extends GenericService<Accounts, AccountsDTO> {
 		Optional<Accounts> optionalEntity = repository.findById(entityId);
 		return entityToDto(optionalEntity);
 	}
-
 	/**
 	 * Saves the given entity with the given PK <br>
 	 * "UPSERT" operation (updated if it exists or created if it does not exist) <br>
@@ -213,6 +212,39 @@ public class AccountsService extends GenericService<Accounts, AccountsDTO> {
 	    repository.save(a);
 	    return true;
 	}
+	public boolean requestPasswordReset(String email) {
+	    Optional<Accounts> opt = repository.findByEmail(email);
+	    if (opt.isEmpty()) return false;
+
+	    Accounts account = opt.get();
+	    if (!Boolean.TRUE.equals(account.getIsverified())) return false;
+
+	    // Generate token and expiry
+	    account.setToken(UUID.randomUUID().toString());
+	    account.setTokenexpiry(Date.from(Instant.now().plus(1, ChronoUnit.HOURS))); // 1 hour validity
+	    repository.save(account);
+	    return true;
+	}
+	public String getTokenByEmail(String email) {
+	    return repository.findByEmail(email)
+	        .map(Accounts::getToken)
+	        .orElse(null); 
+	    }
+
+	public boolean resetPassword(String token, String newPassword) {
+	    Optional<Accounts> opt = repository.findByToken(token);
+	    if (opt.isEmpty()) return false;
+
+	    Accounts account = opt.get();
+	    if (account.getTokenexpiry().before(new java.sql.Date(System.currentTimeMillis()))) return false;
+
+	    account.setPasswordhased(passwordEncoder.encode(newPassword));
+	    account.setToken(null);
+	    account.setTokenexpiry(null);
+	    repository.save(account);
+	    return true;
+	}
+
 
 
 	/**
