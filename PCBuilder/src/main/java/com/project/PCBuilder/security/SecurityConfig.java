@@ -35,17 +35,23 @@ public class SecurityConfig {
             .requestMatchers(
               "/api/v1/accounts/signup",
               "/api/v1/accounts/verify/**",
-              "/api/v1/accounts/login"
-            ).permitAll()
-            .anyRequest().authenticated()
-        .and()
-          .addFilterBefore(
-            jwtAuthenticationFilter(),
-            UsernamePasswordAuthenticationFilter.class
-          );
+              "/api/v1/accounts/login",
+              "/swagger-ui/**",
+              "/v3/api-docs/**",
+              "/swagger-resources/**",
+              "/configuration/**",
+              "/webjars/**"
+                    ).permitAll()
+                    .anyRequest().permitAll(); // TEMP: all requests are permitted, no authentication required
+//                    .anyRequest().authenticated() // PROD: enable authentication for other endpoints
+//                    .and()
+//                      .addFilterBefore(
+//                        jwtAuthenticationFilter(), // PROD: enable JWT authentication filter
+//                        UsernamePasswordAuthenticationFilter.class
+//                      );
+                return http.build();
+            }
 
-        return http.build();
-    }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -64,8 +70,7 @@ public class SecurityConfig {
         config.setAllowedOriginPatterns(List.of("*")); // Use this instead of setAllowedOrigins with credentials
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true); // FIXED: Must be true for cookies to work
-        config.setExposedHeaders(List.of("Set-Cookie")); // FIXED: Expose cookie header
+        config.setExposedHeaders(List.of("Authorization"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

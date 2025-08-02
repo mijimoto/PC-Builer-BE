@@ -21,6 +21,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.stream.Collectors;
+
 import ${ROOT_PKG}.persistence.entities.${jpaEntityClass};
 import ${ROOT_PKG}.persistence.repositories.${repositoryClass};
 import ${ROOT_PKG}.rest.dto.${dtoClass};
@@ -34,8 +37,13 @@ import ${ROOT_PKG}.persistence.entities.${jpaEntityIdClass};
 #if ( $link.isCardinalityManyToOne() || $link.isCardinalityOneToOne() )
 import ${ROOT_PKG}.persistence.entities.${link.targetEntity.name};
 import ${ROOT_PKG}.persistence.repositories.${link.targetEntity.name}Repository;
+import ${ROOT_PKG}.rest.dto.${link.targetEntity.name}DTO;
 #end
 #end
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureQuery;
 
 /**
  * REST service for entity "${entity.name}" <br>
@@ -60,6 +68,8 @@ public class ${serviceClass} extends GenericService<${jpaEntityClass}, ${dtoClas
 	private final ${link.targetEntity.name}Repository ${link.targetEntity.name.toLowerCase()}Repository;
 #end
 #end
+	
+	private final EntityManager em;
 
 	/**
 	 * Constructor (usable for Dependency Injection)
@@ -71,7 +81,7 @@ public class ${serviceClass} extends GenericService<${jpaEntityClass}, ${dtoClas
 #end
 #end
 	 */
-	public ${serviceClass}(${repositoryClass} repository#foreach( $link in $entity.links )#if ( $link.isCardinalityManyToOne() || $link.isCardinalityOneToOne() ), ${link.targetEntity.name}Repository ${link.targetEntity.name.toLowerCase()}Repository#end#end) {
+	public ${serviceClass}(${repositoryClass} repository#foreach( $link in $entity.links )#if ( $link.isCardinalityManyToOne() || $link.isCardinalityOneToOne() ), ${link.targetEntity.name}Repository ${link.targetEntity.name.toLowerCase()}Repository#end#end, EntityManager em) {
 		super(${jpaEntityClass}.class, ${dtoClass}.class);
 		this.repository = repository;
 #foreach( $link in $entity.links )
@@ -79,6 +89,7 @@ public class ${serviceClass} extends GenericService<${jpaEntityClass}, ${dtoClas
 		this.${link.targetEntity.name.toLowerCase()}Repository = ${link.targetEntity.name.toLowerCase()}Repository;
 #end
 #end
+		this.em = em;
 	}
 	
 	/**
@@ -130,10 +141,69 @@ public class ${serviceClass} extends GenericService<${jpaEntityClass}, ${dtoClas
 	 *
 	 * @return
 	 */
-	public List<${dtoClass}> findAll() {
-		logger.debug("findAll()");
-		Iterable<${jpaEntityClass}> all = repository.findAll();
-		return entityListToDtoList(all);
+	/*
+	 * public List<${dtoClass}> findAll() {
+			logger.debug("findAll()");
+			Iterable<${jpaEntityClass}> all = repository.findAll();
+			return entityListToDtoList(all);
+		}
+	 */
+	public List<${dtoClass}> findAll(int pageNumber, int pageSize, String searchName, BigDecimal minPrice, BigDecimal maxPrice, String sortBy, String sortDirection) {
+	    logger.debug("findAll() via stored procedure with parameters");
+
+	    StoredProcedureQuery sp = em.createStoredProcedureQuery("sp_Get${entity.name}sWithPagination");
+
+	    sp.registerStoredProcedureParameter("PageNumber", Integer.class, ParameterMode.IN);
+	    sp.registerStoredProcedureParameter("PageSize", Integer.class, ParameterMode.IN);
+	    sp.registerStoredProcedureParameter("SearchName", String.class, ParameterMode.IN);
+	    sp.registerStoredProcedureParameter("MinPrice", BigDecimal.class, ParameterMode.IN);
+	    sp.registerStoredProcedureParameter("MaxPrice", BigDecimal.class, ParameterMode.IN);
+	    sp.registerStoredProcedureParameter("SortBy", String.class, ParameterMode.IN);
+	    sp.registerStoredProcedureParameter("SortDirection", String.class, ParameterMode.IN);
+	    sp.registerStoredProcedureParameter("TotalCount", Integer.class, ParameterMode.OUT);
+
+	    sp.setParameter("PageNumber", pageNumber);
+	    sp.setParameter("PageSize", pageSize);
+	    sp.setParameter("SearchName", searchName);
+	    sp.setParameter("MinPrice", minPrice);
+	    sp.setParameter("MaxPrice", maxPrice);
+	    sp.setParameter("SortBy", sortBy);
+	    sp.setParameter("SortDirection", sortDirection);
+
+	    @SuppressWarnings("unchecked")
+	    List<Object[]> rows = sp.getResultList();
+
+	    return rows.stream().map(r -> {
+	        ${dtoClass} ${fn.uncapitalize($entity.name)}Dto = new ${dtoClass}();
+
+#foreach( $link in $entity.links )
+#if ( $link.isCardinalityManyToOne() || $link.isCardinalityOneToOne() )
+	        ${link.targetEntity.name}DTO ${fn.uncapitalize($link.targetEntity.name)} = new ${link.targetEntity.name}DTO();
+	        ${fn.uncapitalize($link.targetEntity.name)}.set${fn.capitalize($link.targetEntity.keyAttribute.name)}((Integer) r[0]);
+	        ${fn.uncapitalize($link.targetEntity.name)}.set${fn.capitalize($link.targetEntity.nonKeyAttributes.get(0).name)}((String) r[1]);
+	        ${fn.uncapitalize($link.targetEntity.name)}.set${fn.capitalize($link.targetEntity.nonKeyAttributes.get(1).name)}((BigDecimal) r[2]);
+
+	        ${fn.uncapitalize($entity.name)}Dto.set${fn.capitalize($entity.keyAttribute.name)}(${fn.uncapitalize($link.targetEntity.name)}.get${fn.capitalize($link.targetEntity.keyAttribute.name)}());
+	        ${fn.uncapitalize($entity.name)}Dto.set${fn.capitalize($link.targetEntity.name)}(${fn.uncapitalize($link.targetEntity.name)});
+#break
+#end
+#end
+#set($index = 3)
+#foreach( $attribute in $entity.nonKeyAttributes )
+#if ( !$attribute.name.toLowerCase().contains("partid") && !$attribute.name.toLowerCase().contains("componentid") )
+#if ( $attribute.type == "Integer" )
+	        ${fn.uncapitalize($entity.name)}Dto.set${fn.capitalize($attribute.name)}((Integer) r[${index}]);
+#elseif ( $attribute.type == "BigDecimal" )
+	        ${fn.uncapitalize($entity.name)}Dto.set${fn.capitalize($attribute.name)}((BigDecimal) r[${index}]);
+#else
+	        ${fn.uncapitalize($entity.name)}Dto.set${fn.capitalize($attribute.name)}((String) r[${index}]);
+#end
+#set($index = $index + 1)
+#end
+#end
+
+	        return ${fn.uncapitalize($entity.name)}Dto;
+	    }).collect(Collectors.toList());
 	}
 
 #if ( $entity.hasCompositePrimaryKey() )

@@ -1,6 +1,7 @@
 
 package com.project.PCBuilder.rest.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.project.PCBuilder.rest.dto.WirednetworkcardDTO;
 import com.project.PCBuilder.rest.services.WirednetworkcardService;
+
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -29,9 +31,17 @@ public class WirednetworkcardRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<WirednetworkcardDTO>> findAll() {
-        logger.debug("GET - findAll");
-        List<WirednetworkcardDTO> list = service.findAll();
+    public ResponseEntity<List<WirednetworkcardDTO>> findAll(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "20") int pageSize,
+            @RequestParam(required = false) String searchName,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(defaultValue = "PartName") String sortBy,
+            @RequestParam(defaultValue = "ASC") String sortDirection
+    ) {
+        logger.debug("GET - findAll with pagination & filters");
+        List<WirednetworkcardDTO> list = service.findAll(pageNumber, pageSize, searchName, minPrice, maxPrice, sortBy, sortDirection);
         return ResponseEntity.ok(list);
     }
 
