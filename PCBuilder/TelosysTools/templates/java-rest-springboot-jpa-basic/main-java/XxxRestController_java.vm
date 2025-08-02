@@ -13,7 +13,6 @@ package ${target.javaPackageFromFolder(${SRC})};
 #foreach( $import in $java.imports($entity.keyAttributes) )
 import $import;
 #end
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -39,7 +38,6 @@ import ${ROOT_PKG}.rest.services.${serviceClass};
   #set($sep = ", ")
 #end
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "${REST_API_ROOT}/${fn.toLowerCase($entity.name)}", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ${controllerClass} {
@@ -54,17 +52,9 @@ public class ${controllerClass} {
     }
 
     @GetMapping
-    public ResponseEntity<List<${dtoClass}>> findAll(
-            @RequestParam(defaultValue = "1") int pageNumber,
-            @RequestParam(defaultValue = "20") int pageSize,
-            @RequestParam(required = false) String searchName,
-            @RequestParam(required = false) BigDecimal minPrice,
-            @RequestParam(required = false) BigDecimal maxPrice,
-            @RequestParam(defaultValue = "PartName") String sortBy,
-            @RequestParam(defaultValue = "ASC") String sortDirection
-    ) {
-        logger.debug("GET - findAll with pagination & filters");
-        List<${dtoClass}> list = service.findAll(pageNumber, pageSize, searchName, minPrice, maxPrice, sortBy, sortDirection);
+    public ResponseEntity<List<${dtoClass}>> findAll() {
+        logger.debug("GET - findAll");
+        List<${dtoClass}> list = service.findAll();
         return ResponseEntity.ok(list);
     }
 

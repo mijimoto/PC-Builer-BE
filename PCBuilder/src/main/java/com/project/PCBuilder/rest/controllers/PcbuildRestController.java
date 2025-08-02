@@ -1,4 +1,3 @@
-
 package com.project.PCBuilder.rest.controllers;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.PcbuildDTO;
 import com.project.PCBuilder.rest.services.PcbuildService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/pcbuild", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PcbuildRestController {
@@ -35,10 +33,18 @@ public class PcbuildRestController {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/{pcid}/{componentid}")
-    public ResponseEntity<PcbuildDTO> findById(@PathVariable Integer pcid, @PathVariable Integer componentid) {
+    // NEW ENDPOINT: Get all pcbuild records by pcid
+    @GetMapping("/pc/{pcid}")
+    public ResponseEntity<List<PcbuildDTO>> findByPcid(@PathVariable Integer pcid) {
+        logger.debug("GET - findByPcid: {}", pcid);
+        List<PcbuildDTO> list = service.findByPcid(pcid);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{pcid}/{partid}")
+    public ResponseEntity<PcbuildDTO> findById(@PathVariable Integer pcid, @PathVariable Integer partid) {
         logger.debug("GET - findById");
-        PcbuildDTO dto = service.findById(pcid, componentid);
+        PcbuildDTO dto = service.findById(pcid, partid);
         return (dto != null) ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
@@ -52,10 +58,10 @@ public class PcbuildRestController {
         }
     }
 
-    @PutMapping(value = "/{pcid}/{componentid}")
-    public ResponseEntity<Void> save(@PathVariable Integer pcid, @PathVariable Integer componentid, @RequestBody PcbuildDTO pcbuildDTO) {
+    @PutMapping(value = "/{pcid}/{partid}")
+    public ResponseEntity<Void> save(@PathVariable Integer pcid, @PathVariable Integer partid, @RequestBody PcbuildDTO pcbuildDTO) {
         logger.debug("PUT - save");
-        service.save(pcid, componentid, pcbuildDTO);
+        service.save(pcid, partid, pcbuildDTO);
         return ResponseEntity.ok().build();
     }
 
@@ -69,20 +75,20 @@ public class PcbuildRestController {
         }
     }
 
-    @PatchMapping(value = "/{pcid}/{componentid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> partialUpdate(@PathVariable Integer pcid, @PathVariable Integer componentid, @RequestBody PcbuildDTO pcbuildDTO) {
+    @PatchMapping(value = "/{pcid}/{partid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> partialUpdate(@PathVariable Integer pcid, @PathVariable Integer partid, @RequestBody PcbuildDTO pcbuildDTO) {
         logger.debug("PATCH - partialUpdate");
-        if (service.partialUpdate(pcid, componentid, pcbuildDTO)) {
+        if (service.partialUpdate(pcid, partid, pcbuildDTO)) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/{pcid}/{componentid}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer pcid, @PathVariable Integer componentid) {
+    @DeleteMapping("/{pcid}/{partid}")
+    public ResponseEntity<Void> deleteById(@PathVariable Integer pcid, @PathVariable Integer partid) {
         logger.debug("DELETE - deleteById");
-        if (service.deleteById(pcid, componentid)) {
+        if (service.deleteById(pcid, partid)) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();

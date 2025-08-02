@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Telosys Database Repository --><root>
-    <tableList databaseId="1" databaseName="SQL-SERVER" databaseProductName="Microsoft SQL Server" generation="2025-07-29 09:44:23">
+    <tableList databaseId="1" databaseName="SQL-SERVER" databaseProductName="Microsoft SQL Server" generation="2025-08-02 21:25:12">
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Accounts" name="Accounts" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="AccountID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="accountid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Accountid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="FirstName" dbNotNull="false" dbPosition="2" dbSize="256" dbTypeName="varchar" inputType="text" javaName="firstname" javaType="java.lang.String" jdbcTypeCode="12" label="Firstname" maxLength="256" notNull="false" selected="true"/>
@@ -15,8 +15,8 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Cpu" name="CPU" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="core_count" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="int" inputType="number" javaName="coreCount" javaType="java.lang.Integer" jdbcTypeCode="4" label="Core count" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="core_clock" dbNotNull="false" dbPosition="3" dbSize="5" dbTypeName="decimal" inputType="number" javaName="coreClock" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Core clock" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="boost_clock" dbNotNull="false" dbPosition="4" dbSize="5" dbTypeName="decimal" inputType="number" javaName="boostClock" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Boost clock" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="core_clock" dbNotNull="false" dbPosition="3" dbSize="38" dbTypeName="numeric" inputType="number" javaName="coreClock" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Core clock" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="boost_clock" dbNotNull="false" dbPosition="4" dbSize="38" dbTypeName="numeric" inputType="number" javaName="boostClock" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Boost clock" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="microarchitecture" dbNotNull="false" dbPosition="5" dbSize="100" dbTypeName="varchar" inputType="text" javaName="microarchitecture" javaType="java.lang.String" jdbcTypeCode="12" label="Microarchitecture" maxLength="100" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="tdp" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="int" inputType="number" javaName="tdp" javaType="java.lang.Integer" jdbcTypeCode="4" label="Tdp" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="graphics" dbNotNull="false" dbPosition="7" dbSize="100" dbTypeName="varchar" inputType="text" javaName="graphics" javaType="java.lang.String" jdbcTypeCode="12" label="Graphics" maxLength="100" notNull="false" selected="true"/>
@@ -80,7 +80,7 @@
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="psu" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="psu" javaType="java.lang.Integer" jdbcTypeCode="4" label="Psu" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="side_panel" dbNotNull="false" dbPosition="5" dbSize="100" dbTypeName="varchar" inputType="text" javaName="sidePanel" javaType="java.lang.String" jdbcTypeCode="12" label="Side panel" maxLength="100" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="external_volume" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="decimal" inputType="number" javaName="externalVolume" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="External volume" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="external_volume" dbNotNull="false" dbPosition="6" dbSize="38" dbTypeName="numeric" inputType="number" javaName="externalVolume" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="External volume" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="internal_35_bays" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="int" inputType="number" javaName="internal35Bays" javaType="java.lang.Integer" jdbcTypeCode="4" label="Internal 35 bays" notNull="false" selected="true"/>
             <fk name="FK__Cases__PartID__5AEE82B9">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Cases" tableref="Parts" updaterule="3"/>
@@ -94,7 +94,6 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Components" name="Components" schema="dbo">
             <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="ComponentID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="componentid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Componentid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="ComponentName" dbNotNull="true" dbPosition="2" dbSize="100" dbTypeName="varchar" inputType="text" javaName="componentname" javaType="java.lang.String" jdbcTypeCode="12" label="Componentname" maxLength="100" notEmpty="true" notNull="true" selected="true"/>
-            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__Compone__412EB0B6" id="LINK_FK_FK__PCBuild__Compone__412EB0B6_I" inverseSideOf="LINK_FK_FK__PCBuild__Compone__412EB0B6_O" javaName="listOfPcbuild" javaType="unused" joinTableName="" mappedBy="components" optional="" owningSide="false" sourceTableName="Components" targetEntity="Pcbuild" targetTableName="PCBuild" used="true"/>
             <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Parts__Component__44FF419A" id="LINK_FK_FK__Parts__Component__44FF419A_I" inverseSideOf="LINK_FK_FK__Parts__Component__44FF419A_O" javaName="listOfParts" javaType="unused" joinTableName="" mappedBy="components" optional="" owningSide="false" sourceTableName="Components" targetEntity="Parts" targetTableName="Parts" used="true"/>
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Externalharddrive" name="ExternalHardDrive" schema="dbo">
@@ -102,7 +101,7 @@
             <column dbComment="" dbDefaultValue="" dbName="type" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="12" label="Type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="interface" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="interface" javaType="java.lang.String" jdbcTypeCode="12" label="Interface" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="capacity" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="capacity" javaType="java.lang.Integer" jdbcTypeCode="4" label="Capacity" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="decimal" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Price per gb" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="5" dbSize="38" dbTypeName="numeric" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Price per gb" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
             <fk name="FK__ExternalH__PartI__08B54D69">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="ExternalHardDrive" tableref="Parts" updaterule="3"/>
@@ -116,7 +115,7 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Fancontroller" name="FanController" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="channels" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="int" inputType="number" javaName="channels" javaType="java.lang.Integer" jdbcTypeCode="4" label="Channels" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="channel_wattage" dbNotNull="false" dbPosition="3" dbSize="5" dbTypeName="decimal" inputType="number" javaName="channelWattage" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Channel wattage" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="channel_wattage" dbNotNull="false" dbPosition="3" dbSize="38" dbTypeName="numeric" inputType="number" javaName="channelWattage" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Channel wattage" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="pwm" dbNotNull="false" dbPosition="4" dbSize="1" dbTypeName="bit" inputType="checkbox" javaName="pwm" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Pwm" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="form_factor" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="formFactor" javaType="java.lang.String" jdbcTypeCode="12" label="Form factor" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
@@ -148,8 +147,8 @@
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Internalharddrive" name="InternalHardDrive" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="capacity" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="decimal" inputType="number" javaName="capacity" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Capacity" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="3" dbSize="18" dbTypeName="decimal" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Price per gb" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="capacity" dbNotNull="false" dbPosition="2" dbSize="38" dbTypeName="numeric" inputType="number" javaName="capacity" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Capacity" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="3" dbSize="38" dbTypeName="numeric" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Price per gb" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="type" dbNotNull="false" dbPosition="4" dbSize="50" dbTypeName="varchar" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="12" label="Type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="cache" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="cache" javaType="java.lang.Integer" jdbcTypeCode="4" label="Cache" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="form_factor" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="formFactor" javaType="java.lang.String" jdbcTypeCode="12" label="Form factor" maxLength="50" notNull="false" selected="true"/>
@@ -184,10 +183,10 @@
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="speed" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="speed" javaType="java.lang.String" jdbcTypeCode="12" label="Speed" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="modules" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="modules" javaType="java.lang.String" jdbcTypeCode="12" label="Modules" maxLength="50" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="decimal" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Price per gb" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="price_per_gb" dbNotNull="false" dbPosition="4" dbSize="38" dbTypeName="numeric" inputType="number" javaName="pricePerGb" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Price per gb" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="first_word_latency" dbNotNull="false" dbPosition="6" dbSize="5" dbTypeName="decimal" inputType="number" javaName="firstWordLatency" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="First word latency" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="cas_latency" dbNotNull="false" dbPosition="7" dbSize="4" dbTypeName="decimal" inputType="number" javaName="casLatency" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Cas latency" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="first_word_latency" dbNotNull="false" dbPosition="6" dbSize="38" dbTypeName="numeric" inputType="number" javaName="firstWordLatency" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="First word latency" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="cas_latency" dbNotNull="false" dbPosition="7" dbSize="38" dbTypeName="numeric" inputType="number" javaName="casLatency" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Cas latency" notNull="false" selected="true"/>
             <fk name="FK__Memory__PartID__52593CB8">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Memory" tableref="Parts" updaterule="3"/>
             </fk>
@@ -199,10 +198,10 @@
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Monitor" name="Monitor" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="screen_size" dbNotNull="false" dbPosition="2" dbSize="5" dbTypeName="decimal" inputType="number" javaName="screenSize" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Screen size" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="screen_size" dbNotNull="false" dbPosition="2" dbSize="38" dbTypeName="numeric" inputType="number" javaName="screenSize" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Screen size" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="resolution" dbNotNull="false" dbPosition="3" dbSize="20" dbTypeName="varchar" inputType="text" javaName="resolution" javaType="java.lang.String" jdbcTypeCode="12" label="Resolution" maxLength="20" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="refresh_rate" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="refreshRate" javaType="java.lang.Integer" jdbcTypeCode="4" label="Refresh rate" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="response_time" dbNotNull="false" dbPosition="5" dbSize="4" dbTypeName="decimal" inputType="number" javaName="responseTime" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Response time" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="response_time" dbNotNull="false" dbPosition="5" dbSize="38" dbTypeName="numeric" inputType="number" javaName="responseTime" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Response time" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="panel_type" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="panelType" javaType="java.lang.String" jdbcTypeCode="12" label="Panel type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="aspect_ratio" dbNotNull="false" dbPosition="7" dbSize="10" dbTypeName="varchar" inputType="text" javaName="aspectRatio" javaType="java.lang.String" jdbcTypeCode="12" label="Aspect ratio" maxLength="10" notNull="false" selected="true"/>
             <fk name="FK__Monitor__PartID__6383C8BA">
@@ -278,10 +277,10 @@
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Pcbuild" name="PCBuild" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PCID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="pcid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Pcid" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="ComponentID" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="componentid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Componentid" notNull="true" selected="true"/>
-            <column dateType="DT" dbComment="" dbDefaultValue="(getdate())" dbName="CreatedAt" dbNotNull="false" dbPosition="3" dbSize="23" dbTypeName="datetime" inputType="" javaName="createdat" javaType="java.util.Date" jdbcTypeCode="93" label="Createdat" notNull="false" selected="true"/>
-            <fk name="FK__PCBuild__Compone__412EB0B6">
-                <fkcol colname="ComponentID" colref="ComponentID" deferrable="7" deleterule="3" sequence="1" tablename="PCBuild" tableref="Components" updaterule="3"/>
+            <column dateType="DT" dbComment="" dbDefaultValue="(getdate())" dbName="CreatedAt" dbNotNull="false" dbPosition="2" dbSize="23" dbTypeName="datetime" inputType="" javaName="createdat" javaType="java.util.Date" jdbcTypeCode="93" label="Createdat" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="3" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
+            <fk name="FK_PCBuild_PartID">
+                <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="PCBuild" tableref="Parts" updaterule="3"/>
             </fk>
             <fk name="FK__PCBuild__PCID__403A8C7D">
                 <fkcol colname="PCID" colref="PCID" deferrable="7" deleterule="3" sequence="1" tablename="PCBuild" tableref="PCs" updaterule="3"/>
@@ -291,9 +290,9 @@
                     <joinColumn insertable="false" name="PCID" nullable="true" referencedColumnName="PCID" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
-            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK__PCBuild__Compone__412EB0B6" id="LINK_FK_FK__PCBuild__Compone__412EB0B6_O" inverseSideOf="" javaName="components" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PCBuild" targetEntity="Components" targetTableName="Components" used="true">
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK_PCBuild_PartID" id="LINK_FK_FK_PCBuild_PartID_O" inverseSideOf="" javaName="parts" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="PCBuild" targetEntity="Parts" targetTableName="Parts" used="true">
                 <joinColumns>
-                    <joinColumn insertable="false" name="ComponentID" nullable="true" referencedColumnName="ComponentID" unique="false" updatable="false"/>
+                    <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
         </table>
@@ -342,6 +341,7 @@
                 </joinColumns>
             </link>
             <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__OS__PartID__60A75C0F" id="LINK_FK_FK__OS__PartID__60A75C0F_I" inverseSideOf="LINK_FK_FK__OS__PartID__60A75C0F_O" javaName="listOfOs" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Os" targetTableName="OS" used="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK_PCBuild_PartID" id="LINK_FK_FK_PCBuild_PartID_I" inverseSideOf="LINK_FK_FK_PCBuild_PartID_O" javaName="listOfPcbuild" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Pcbuild" targetTableName="PCBuild" used="true"/>
             <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__InternalH__PartI__5535A963" id="LINK_FK_FK__InternalH__PartI__5535A963_I" inverseSideOf="LINK_FK_FK__InternalH__PartI__5535A963_O" javaName="listOfInternalharddrive" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Internalharddrive" targetTableName="InternalHardDrive" used="true"/>
             <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__Cases__PartID__5AEE82B9" id="LINK_FK_FK__Cases__PartID__5AEE82B9_I" inverseSideOf="LINK_FK_FK__Cases__PartID__5AEE82B9_O" javaName="listOfCases" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Cases" targetTableName="Cases" used="true"/>
             <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK__WiredNetw__PartI__693CA210" id="LINK_FK_FK__WiredNetw__PartI__693CA210_I" inverseSideOf="LINK_FK_FK__WiredNetw__PartI__693CA210_O" javaName="listOfWirednetworkcard" javaType="unused" joinTableName="" mappedBy="parts" optional="" owningSide="false" sourceTableName="Parts" targetEntity="Wirednetworkcard" targetTableName="WiredNetworkCard" used="true"/>
@@ -366,12 +366,35 @@
                 </joinColumns>
             </link>
         </table>
+        <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="SpringSession" name="SPRING_SESSION" schema="dbo">
+            <column dbComment="" dbDefaultValue="" dbName="PRIMARY_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="36" dbTypeName="char" inputType="text" javaName="primaryId" javaType="java.lang.String" jdbcTypeCode="1" label="Primary id" maxLength="36" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="SESSION_ID" dbNotNull="true" dbPosition="2" dbSize="36" dbTypeName="char" inputType="text" javaName="sessionId" javaType="java.lang.String" jdbcTypeCode="1" label="Session id" maxLength="36" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="CREATION_TIME" dbNotNull="true" dbPosition="3" dbSize="19" dbTypeName="bigint" inputType="number" javaName="creationTime" javaType="java.lang.Long" jdbcTypeCode="-5" label="Creation time" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="LAST_ACCESS_TIME" dbNotNull="true" dbPosition="4" dbSize="19" dbTypeName="bigint" inputType="number" javaName="lastAccessTime" javaType="java.lang.Long" jdbcTypeCode="-5" label="Last access time" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="MAX_INACTIVE_INTERVAL" dbNotNull="true" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="maxInactiveInterval" javaType="java.lang.Integer" jdbcTypeCode="4" label="Max inactive interval" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="EXPIRY_TIME" dbNotNull="true" dbPosition="6" dbSize="19" dbTypeName="bigint" inputType="number" javaName="expiryTime" javaType="java.lang.Long" jdbcTypeCode="-5" label="Expiry time" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="PRINCIPAL_NAME" dbNotNull="false" dbPosition="7" dbSize="100" dbTypeName="varchar" inputType="text" javaName="principalName" javaType="java.lang.String" jdbcTypeCode="12" label="Principal name" maxLength="100" notNull="false" selected="true"/>
+            <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="SPRING_SESSION_ATTRIBUTES_FK" id="LINK_FK_SPRING_SESSION_ATTRIBUTES_FK_I" inverseSideOf="LINK_FK_SPRING_SESSION_ATTRIBUTES_FK_O" javaName="listOfSpringSessionAttributes" javaType="unused" joinTableName="" mappedBy="springSession" optional="" owningSide="false" sourceTableName="SPRING_SESSION" targetEntity="SpringSessionAttributes" targetTableName="SPRING_SESSION_ATTRIBUTES" used="true"/>
+        </table>
+        <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="SpringSessionAttributes" name="SPRING_SESSION_ATTRIBUTES" schema="dbo">
+            <column dbComment="" dbDefaultValue="" dbName="SESSION_PRIMARY_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="36" dbTypeName="char" inputType="text" javaName="sessionPrimaryId" javaType="java.lang.String" jdbcTypeCode="1" label="Session primary id" maxLength="36" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="ATTRIBUTE_NAME" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="200" dbTypeName="varchar" inputType="text" javaName="attributeName" javaType="java.lang.String" jdbcTypeCode="12" label="Attribute name" maxLength="200" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="ATTRIBUTE_BYTES" dbNotNull="true" dbPosition="3" dbSize="2147483647" dbTypeName="image" inputType="" javaName="attributeBytes" javaType="byte[]" jdbcTypeCode="-4" label="Attribute bytes" notNull="true" selected="true"/>
+            <fk name="SPRING_SESSION_ATTRIBUTES_FK">
+                <fkcol colname="SESSION_PRIMARY_ID" colref="PRIMARY_ID" deferrable="7" deleterule="0" sequence="1" tablename="SPRING_SESSION_ATTRIBUTES" tableref="SPRING_SESSION" updaterule="3"/>
+            </fk>
+            <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="SPRING_SESSION_ATTRIBUTES_FK" id="LINK_FK_SPRING_SESSION_ATTRIBUTES_FK_O" inverseSideOf="" javaName="springSession" javaType="unused" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="SPRING_SESSION_ATTRIBUTES" targetEntity="SpringSession" targetTableName="SPRING_SESSION" used="true">
+                <joinColumns>
+                    <joinColumn insertable="false" name="SESSION_PRIMARY_ID" nullable="true" referencedColumnName="PRIMARY_ID" unique="false" updatable="false"/>
+                </joinColumns>
+            </link>
+        </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Soundcard" name="SoundCard" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="channels" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="varchar" inputType="text" javaName="channels" javaType="java.lang.String" jdbcTypeCode="12" label="Channels" maxLength="10" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="digital_audio" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="int" inputType="number" javaName="digitalAudio" javaType="java.lang.Integer" jdbcTypeCode="4" label="Digital audio" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="snr" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="snr" javaType="java.lang.Integer" jdbcTypeCode="4" label="Snr" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="sample_rate" dbNotNull="false" dbPosition="5" dbSize="5" dbTypeName="decimal" inputType="number" javaName="sampleRate" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Sample rate" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="sample_rate" dbNotNull="false" dbPosition="5" dbSize="38" dbTypeName="numeric" inputType="number" javaName="sampleRate" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Sample rate" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="chipset" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="chipset" javaType="java.lang.String" jdbcTypeCode="12" label="Chipset" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="interface" dbNotNull="false" dbPosition="7" dbSize="50" dbTypeName="varchar" inputType="text" javaName="interface" javaType="java.lang.String" jdbcTypeCode="12" label="Interface" maxLength="50" notNull="false" selected="true"/>
             <fk name="FK__SoundCard__PartI__66603565">
@@ -386,7 +409,7 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Speakers" name="Speakers" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="configuration" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="configuration" javaType="java.lang.String" jdbcTypeCode="12" label="Configuration" maxLength="50" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="wattage" dbNotNull="false" dbPosition="3" dbSize="6" dbTypeName="decimal" inputType="number" javaName="wattage" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Wattage" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="wattage" dbNotNull="false" dbPosition="3" dbSize="38" dbTypeName="numeric" inputType="number" javaName="wattage" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Wattage" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="frequency_response" dbNotNull="false" dbPosition="4" dbSize="50" dbTypeName="varchar" inputType="text" javaName="frequencyResponse" javaType="java.lang.String" jdbcTypeCode="12" label="Frequency response" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="5" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
             <fk name="FK__Speakers__PartID__778AC167">
@@ -400,7 +423,7 @@
         </table>
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Thermalpaste" name="ThermalPaste" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="amount" dbNotNull="false" dbPosition="2" dbSize="5" dbTypeName="decimal" inputType="number" javaName="amount" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Amount" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="amount" dbNotNull="false" dbPosition="2" dbSize="38" dbTypeName="numeric" inputType="number" javaName="amount" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Amount" notNull="false" selected="true"/>
             <fk name="FK__ThermalPa__PartI__05D8E0BE">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="ThermalPaste" tableref="Parts" updaterule="3"/>
             </fk>
@@ -432,7 +455,7 @@
         <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Videocard" name="VideoCard" schema="dbo">
             <column dbComment="" dbDefaultValue="" dbName="PartID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="int" inputType="number" javaName="partid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Partid" notNull="true" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="chipset" dbNotNull="false" dbPosition="2" dbSize="50" dbTypeName="varchar" inputType="text" javaName="chipset" javaType="java.lang.String" jdbcTypeCode="12" label="Chipset" maxLength="50" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="memory" dbNotNull="false" dbPosition="3" dbSize="4" dbTypeName="decimal" inputType="number" javaName="memory" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Memory" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="memory" dbNotNull="false" dbPosition="3" dbSize="38" dbTypeName="numeric" inputType="number" javaName="memory" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Memory" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="core_clock" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="coreClock" javaType="java.lang.Integer" jdbcTypeCode="4" label="Core clock" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="boost_clock" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="int" inputType="number" javaName="boostClock" javaType="java.lang.Integer" jdbcTypeCode="4" label="Boost clock" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="color" dbNotNull="false" dbPosition="6" dbSize="50" dbTypeName="varchar" inputType="text" javaName="color" javaType="java.lang.String" jdbcTypeCode="12" label="Color" maxLength="50" notNull="false" selected="true"/>
@@ -452,7 +475,7 @@
             <column dbComment="" dbDefaultValue="" dbName="connection" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="varchar" inputType="text" javaName="connection" javaType="java.lang.String" jdbcTypeCode="12" label="Connection" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="focus_type" dbNotNull="false" dbPosition="4" dbSize="50" dbTypeName="varchar" inputType="text" javaName="focusType" javaType="java.lang.String" jdbcTypeCode="12" label="Focus type" maxLength="50" notNull="false" selected="true"/>
             <column dbComment="" dbDefaultValue="" dbName="os" dbNotNull="false" dbPosition="5" dbSize="100" dbTypeName="varchar" inputType="text" javaName="os" javaType="java.lang.String" jdbcTypeCode="12" label="Os" maxLength="100" notNull="false" selected="true"/>
-            <column dbComment="" dbDefaultValue="" dbName="fov" dbNotNull="false" dbPosition="6" dbSize="5" dbTypeName="decimal" inputType="number" javaName="fov" javaType="java.math.BigDecimal" jdbcTypeCode="3" label="Fov" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="fov" dbNotNull="false" dbPosition="6" dbSize="38" dbTypeName="numeric" inputType="number" javaName="fov" javaType="java.math.BigDecimal" jdbcTypeCode="2" label="Fov" notNull="false" selected="true"/>
             <fk name="FK__Webcam__PartID__7A672E12">
                 <fkcol colname="PartID" colref="PartID" deferrable="7" deleterule="3" sequence="1" tablename="Webcam" tableref="Parts" updaterule="3"/>
             </fk>
@@ -488,6 +511,13 @@
                     <joinColumn insertable="false" name="PartID" nullable="true" referencedColumnName="PartID" unique="false" updatable="false"/>
                 </joinColumns>
             </link>
+        </table>
+        <table catalog="PCBuilder" databaseComment="" databaseType="TABLE" javaBean="Sysdiagrams" name="sysdiagrams" schema="dbo">
+            <column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="1" dbSize="128" dbTypeName="sysname" inputType="" javaName="name" javaType="java.lang.String" jdbcTypeCode="-9" label="Name" maxLength="128" notEmpty="true" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="principal_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="int" inputType="number" javaName="principalId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Principal id" notNull="true" selected="true"/>
+            <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="diagram_id" dbNotNull="true" dbPosition="3" dbPrimaryKey="true" dbSize="10" dbTypeName="int identity" inputType="number" javaName="diagramId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Diagram id" notNull="true" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="version" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int" inputType="number" javaName="version" javaType="java.lang.Integer" jdbcTypeCode="4" label="Version" notNull="false" selected="true"/>
+            <column dbComment="" dbDefaultValue="" dbName="definition" dbNotNull="false" dbPosition="5" dbSize="2147483647" dbTypeName="varbinary" inputType="" javaName="definition" javaType="byte[]" jdbcTypeCode="-3" label="Definition" notNull="false" selected="true"/>
         </table>
     </tableList>
 </root>

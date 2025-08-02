@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PCBuilder.rest.dto.ComponentsDTO;
 import com.project.PCBuilder.rest.services.ComponentsService;
 
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping(value = "/api/v1/components", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ComponentsRestController {
@@ -42,7 +42,7 @@ public class ComponentsRestController {
         return (dto != null) ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> create(@RequestBody ComponentsDTO componentsDTO) {
         logger.debug("POST - create");
         if (service.create(componentsDTO)) {
