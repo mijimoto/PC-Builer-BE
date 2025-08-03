@@ -81,28 +81,26 @@ public AccountsRestController(AccountsService service,
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
-    @PostMapping("/reset-password/request")
+    @PostMapping("/reset-password/request") 
     public ResponseEntity<String> requestReset(@RequestParam String email) throws MessagingException {
         if (!service.requestPasswordReset(email)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email not found or account not verified");
         }
-
+        
         String token = service.getTokenByEmail(email);
-        String resetLink = "pcbuilder://reset-password?token=" + token;
-
-        // Send HTML email
+        // Use HTTPS link that Gmail will make clickable
+        String resetLink = "https://pcbuilder-546878159726.asia-east1.run.app/app-redirect?token=" + token;
+        
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setTo(email);
         helper.setSubject("Password Reset Request");
-
-        // HTML with clickable link
-        String htmlContent = "<p>Click the link below to reset your password:</p>"
-                + "<p><a href=\"" + resetLink + "\">Reset Password</a></p>";
-
+        
+        String htmlContent = "<p>Click the link below to reset your password:</p>" + 
+                            "<p><a href=\"" + resetLink + "\">Reset Password</a></p>";
         helper.setText(htmlContent, true);
         mailSender.send(mimeMessage);
-
+        
         return ResponseEntity.ok("Reset link sent to email");
     }
 

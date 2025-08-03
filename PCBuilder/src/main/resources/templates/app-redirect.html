@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening PC Builder App...</title>
+</head>
+<body>
+    <h2>Opening PC Builder App...</h2>
+    <p>Please wait...</p>
+    
+    <script th:inline="javascript">
+        const token = /*[[${token}]]*/ '';
+        const appUrl = `pcbuilder://reset-password?token=${token}`;
+        
+        // Immediately try to open your app
+        window.location.href = appUrl;
+    </script>
+</body>
+</html>
