@@ -36,19 +36,20 @@ public class SecurityConfig {
               "/api/v1/accounts/signup",
               "/api/v1/accounts/verify/**",
               "/api/v1/accounts/login",
+              "/api/v1/accounts/reset-password/request",
+              "/api/v1/accounts/reset-password",
               "/swagger-ui/**",
               "/v3/api-docs/**",
               "/swagger-resources/**",
               "/configuration/**",
               "/webjars/**"
                     ).permitAll()
-                    .anyRequest().permitAll(); // TEMP: all requests are permitted, no authentication required
-//                    .anyRequest().authenticated() // PROD: enable authentication for other endpoints
-//                    .and()
-//                      .addFilterBefore(
-//                        jwtAuthenticationFilter(), // PROD: enable JWT authentication filter
-//                        UsernamePasswordAuthenticationFilter.class
-//                      );
+                    .anyRequest().authenticated() // PROD: enable authentication for other endpoints
+                    .and()
+                      .addFilterBefore(
+                        jwtAuthenticationFilter(), // PROD: enable JWT authentication filter
+                        UsernamePasswordAuthenticationFilter.class
+                      );
                 return http.build();
             }
 

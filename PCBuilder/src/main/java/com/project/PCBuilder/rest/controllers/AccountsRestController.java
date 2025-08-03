@@ -101,12 +101,14 @@ public AccountsRestController(AccountsService service,
         @RequestParam String token,
         @RequestParam String newPassword
     ) {
-        if (service.resetPassword(token, newPassword)) {
+        String hashedPassword = encoder.encode(newPassword);
+        if (service.resetPassword(token, hashedPassword)) {
             return ResponseEntity.ok("Password reset successful");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired token");
         }
     }
+
 
     @PutMapping(value = "/{accountid}")
     public ResponseEntity<Void> save(@PathVariable Integer accountid, @RequestBody AccountsDTO accountsDTO) {
