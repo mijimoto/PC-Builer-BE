@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,8 @@ import com.project.PCBuilder.security.CustomUserDetailsService;
 import com.project.PCBuilder.security.JwtUtil;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -79,7 +82,7 @@ public AccountsRestController(AccountsService service,
         }
     }
     @PostMapping("/reset-password/request")
-    public ResponseEntity<String> requestReset(@RequestParam String email) {
+    public ResponseEntity<String> requestReset(@RequestParam String email) throws MessagingException {
         if (!service.requestPasswordReset(email)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email not found or account not verified");
         }
@@ -87,15 +90,22 @@ public AccountsRestController(AccountsService service,
         String token = service.getTokenByEmail(email);
         String resetLink = "pcbuilder://reset-password?token=" + token;
 
-        // Send email
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(email);
-        msg.setSubject("Password Reset Request");
-        msg.setText("Click this link to reset your password: " + resetLink);
-        mailSender.send(msg);
+        // Send HTML email
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+        helper.setTo(email);
+        helper.setSubject("Password Reset Request");
+
+        // HTML with clickable link
+        String htmlContent = "<p>Click the link below to reset your password:</p>"
+                + "<p><a href=\"" + resetLink + "\">Reset Password</a></p>";
+
+        helper.setText(htmlContent, true);
+        mailSender.send(mimeMessage);
 
         return ResponseEntity.ok("Reset link sent to email");
     }
+
     @PostMapping("/reset-password")
     public ResponseEntity<String> resetPassword(
         @RequestParam String token,
