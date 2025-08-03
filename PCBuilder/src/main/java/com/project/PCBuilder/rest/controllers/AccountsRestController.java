@@ -85,7 +85,7 @@ public AccountsRestController(AccountsService service,
         }
 
         String token = service.getTokenByEmail(email);
-        String resetLink = "http://localhost:8080/reset-password?token=" + token;
+        String resetLink = "pcbuilder://reset-password?token=" + token;
 
         // Send email
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -152,7 +152,7 @@ public AccountsRestController(AccountsService service,
       if (!service.register(dto))
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already in use");
       // send verification email
-      String link = "http://localhost:8080/api/v1/accounts/verify/" + dto.getToken();
+      String link = "https://pcbuilder-546878159726.asia-east1.run.app/api/v1/accounts/verify/" + dto.getToken();
       SimpleMailMessage msg = new SimpleMailMessage();
       msg.setTo(dto.getEmail());
       msg.setSubject("Please verify your email");
