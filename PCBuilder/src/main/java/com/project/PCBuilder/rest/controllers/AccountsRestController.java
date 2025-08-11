@@ -88,8 +88,8 @@ public AccountsRestController(AccountsService service,
         }
         
         String token = service.getTokenByEmail(email);
-        // Use HTTPS link that Gmail will make clickable
-        String resetLink = "https://pcbuilder-546878159726.asia-east1.run.app/app-redirect?token=" + token;
+        // Direct link to web reset password page
+        String resetLink = "https://pcbuilder-546878159726.asia-east1.run.app/reset_password?token=" + token;
         
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -103,6 +103,7 @@ public AccountsRestController(AccountsService service,
         
         return ResponseEntity.ok("Reset link sent to email");
     }
+
 
     @PostMapping("/reset-password")
     public ResponseEntity<String> resetPassword(
