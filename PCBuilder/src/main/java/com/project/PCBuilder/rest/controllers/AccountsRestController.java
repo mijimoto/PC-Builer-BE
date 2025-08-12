@@ -89,7 +89,7 @@ public AccountsRestController(AccountsService service,
         
         String token = service.getTokenByEmail(email);
         // Direct link to web reset password page
-        String resetLink = "https://pcbuilder-546878159726.asia-east1.run.app/reset_password?token=" + token;
+        String resetLink = "https://pcbuilder-web-546878159726.asia-east1.run.app//reset_password?token=" + token;
         
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
